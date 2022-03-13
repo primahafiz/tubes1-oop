@@ -10,7 +10,7 @@ private:
     /* Atribut */
     int id;         // id item
     string name;    // nama item
-    string type;   // jenis item
+    string type;    // jenis item
 public:
     // Default Constructor
     Item();

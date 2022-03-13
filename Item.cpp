@@ -4,7 +4,7 @@
 // Default Constructor
 Item::Item() {
     setID(0);
-    setName("Item");
+    setName("ITEM");
     setType("-");
 }
 
