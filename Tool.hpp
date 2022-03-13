@@ -8,7 +8,7 @@
 class Tool : public Item {
 private:
     /* Atribut */
-    int durability;     // durabilitas tool (nilai awal = 10)
+    int durability;     // durabilitas tool
 public:
     // Default Constructor
     Tool();
