@@ -38,7 +38,7 @@ public:
     
     // isTool: mengecek kategori item (TOOL/NONTOOL)
     // Mengembalikan true jika item masuk kategori TOOL
-    virtual bool isTool();
+    virtual bool isTool()=0;
 };
 
 #endif
