@@ -6,28 +6,94 @@
 
 using namespace std;
 
-int main() {
+int main()
+{
   string configPath = "./config";
   string itemConfigPath = configPath + "/item.txt";
 
   // read item from config file
   ifstream itemConfigFile(itemConfigPath);
-  for (string line; getline(itemConfigFile, line);) {
-    cout << line << endl;
+
+  for (string line; getline(itemConfigFile, line);)
+  {
+    // cout << line << endl;
     // do something
   }
 
   // read recipes
   for (const auto &entry :
-       filesystem::directory_iterator(configPath + "/recipe")) {
-    cout << entry.path() << endl;
+       filesystem::directory_iterator(configPath + "/recipe"))
+  {
+    // cout << entry.path() << endl;
     // read from file and do something
   }
 
   // sample interaction
   string command;
-  while (cin >> command) {
-    if (command == "EXPORT") {
+  while (cin >> command)
+  {
+    if (command == "SHOW")
+    {
+      for (int i = 0; i < 3; i++)
+      {
+        for (int j = 0; j < 6; j++)
+        {
+          if (j < 3)
+          {
+            cout << "      " << ends;
+          }
+          else
+          {
+            cout << "[C " << j - 3 + i * 3 << "] " << ends;
+          }
+        }
+        cout << endl;
+      }
+      cout << endl;
+      for (int i = 0; i < 3; i++)
+      {
+        for (int j = 0; j < 9; j++)
+        {
+          if (j + i * 9 > 9)
+          {
+            cout << "[I" << j + i * 9 << "] " << ends;
+          }
+          else
+          {
+            cout << "[I " << j + i * 9 << "] " << ends;
+          }
+        }
+        cout << endl;
+      }
+    }
+    else if (command == "GIVE")
+    {
+      string itemName;
+      int itemQty;
+      cin >> itemName >> itemQty;
+      cout << "TODO" << endl;
+    }
+    else if (command == "DISCARD")
+    {
+    }
+    else if (command == "MOVE")
+    {
+      string slotSrc;
+      int slotQty;
+      string slotDest;
+      // need to handle multiple destinations
+      cin >> slotSrc >> slotQty >> slotDest;
+      cout << "TODO" << endl;
+    }
+    else if (command == "USE")
+    {
+    }
+    else if (command == "CRAFT")
+    {
+      cout << "TODO" << endl;
+    }
+    else if (command == "EXPORT")
+    {
       string outputPath;
       cin >> outputPath;
       ofstream outputFile(outputPath);
@@ -35,26 +101,19 @@ int main() {
       // hardcode for first test case
       outputFile << "21:10" << endl;
       outputFile << "6:1" << endl;
-      for (int i = 2; i < 27; i++) {
+      for (int i = 2; i < 27; i++)
+      {
         outputFile << "0:0" << endl;
       }
 
       cout << "Exported" << endl;
-    } else if (command == "CRAFT") {
-      cout << "TODO" << endl;
-    } else if (command == "GIVE") {
-      string itemName;
-      int itemQty;
-      cin >> itemName >> itemQty;
-      cout << "TODO" << endl;
-    } else if (command == "MOVE") {
-      string slotSrc;
-      int slotQty;
-      string slotDest;
-      // need to handle multiple destinations
-      cin >> slotSrc >> slotQty >> slotDest;
-      cout << "TODO" << endl;
-    } else {
+    }
+    else if (command == "EXIT")
+    {
+      break;
+    }
+    else
+    {
       // todo
       cout << "Invalid command" << endl;
     }
