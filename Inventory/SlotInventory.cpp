@@ -24,8 +24,7 @@ Item* SlotInventory::getSlotItem() const{
     return this->slotItem;
 }
 bool SlotInventory::canBeAdded(int num) const{
-    // cek apakah bisa dimasukan item sehingga total<=64
-    return true;
+    return this->slotItem->getQuantity();
 }
 
 void SlotInventory::addSlot(Item *x){
@@ -35,14 +34,17 @@ void SlotInventory::dropSlot(){
     this->slotItem=NULL;
 }
 void SlotInventory::dropSlot(int num){
-    if(true){//this->slotItem->getQuantity()-num>=0
-        //this->slotItem->setQuantity(this->slotItem->getQuantity()-num)
+    if(this->getSlotItem()->getQuantity()-num>=0){
+        this->slotItem->setQuantity(this->slotItem->getQuantity()-num);
+        if(this->slotItem->getQuantity()==0){
+            this->slotItem=NULL;
+        }
     }else{
         //throw exception
     }
 }
 void SlotInventory::addQuantity(int num){
-    //this->slotItem->setQuantity(this->slotItem->getQuantity()+num)
+    this->slotItem->setQuantity(this->slotItem->getQuantity()+num);
 }
 
 void SlotInventory::printSlot(){

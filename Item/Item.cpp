@@ -44,3 +44,36 @@ void Item::setType(string type) {
 string Item::getType() const {
     return this->type;
 }
+
+// Setter Quantity
+void Item::setQuantity(int quantity){
+    //
+}
+
+// Getter Quantity
+int Item::getQuantity() const{
+    return -1;
+}
+
+// modifyQuantity: menambahkan quantity item non tool sebanyak amount
+// Variabel amount dapat bernilai positif/negatif
+void Item::modifyQuantity(int amount){
+    //
+}
+
+
+// Setter durability
+void Item::setDurability(int durability){
+    //
+}
+
+// Getter durability
+int Item::getDurability() const{
+    return -1;
+}
+
+// modifyDurability: menambahkan durability tool sebanyak changes
+// Variabel changes dapat bernilai positif/negatif
+void Item::modifyDurability(int changes){
+    //
+}
