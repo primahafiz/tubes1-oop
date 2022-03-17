@@ -40,7 +40,7 @@ void SlotInventory::dropSlot(int num){
             this->slotItem=NULL;
         }
     }else{
-        //throw exception
+        throw DeleteInventoryException();
     }
 }
 void SlotInventory::addQuantity(int num){

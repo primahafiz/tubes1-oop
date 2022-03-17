@@ -28,23 +28,23 @@ void Inventory::addToInventory(Item *a){
             return;
         }
     }
-    // throw exception
+    throw InventoryFullException();
 }
 void Inventory::deleteFromInventory(string ID,int num){
     int slotId=this->parsingID(ID);
     if(inventory[slotId].isSlotEmpty()){
-        // throw exception
+        throw DeleteInventoryException();
     }else if(inventory[slotId].getSlotItem()->isTool()){
         if(num==1){
             inventory[slotId].dropSlot();
         }else{
-            // throw exception
+            throw DeleteInventoryException();
         }
     }else if(!inventory[slotId].getSlotItem()->isTool()){
         if(num<=inventory[slotId].getSlotItem()->getQuantity()){
             inventory[slotId].dropSlot(num);
         }else{
-            // throw exception
+            throw DeleteInventoryException();
         }
     }
 }
@@ -52,7 +52,7 @@ void Inventory::combineTwoItem(string IDSrc,string IDDest){
     int slotId1=this->parsingID(IDSrc);
     int slotId2=this->parsingID(IDDest);
     if(inventory[slotId1].isSlotEmpty() || inventory[slotId2].isSlotEmpty()){
-        // throw exception
+        throw CombineNullItemException();
     }else if(!inventory[slotId1].getSlotItem()->isTool() && !inventory[slotId2].getSlotItem()->isTool() && inventory[slotId1].getSlotItem()->getName()==inventory[slotId1].getSlotItem()->getName()){
         if(inventory[slotId1].getSlotItem()->getQuantity()+inventory[slotId2].getSlotItem()->getQuantity()>64){
             inventory[slotId1].getSlotItem()->setQuantity(inventory[slotId1].getSlotItem()->getQuantity()-(64-inventory[slotId2].getSlotItem()->getQuantity()));
@@ -62,7 +62,7 @@ void Inventory::combineTwoItem(string IDSrc,string IDDest){
             inventory[slotId1].dropSlot(inventory[slotId1].getSlotItem()->getQuantity());
         }
     }else{
-        // throw exception
+        throw CombineDifferentItemException();
     }
 }
 void Inventory::exportInventory(){

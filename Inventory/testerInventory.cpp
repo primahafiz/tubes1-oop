@@ -1,6 +1,7 @@
 #include <iostream>
 #include "SlotInventory.hpp"
 #include "../Item/Tool.hpp"
+#include "../Item/nonTool.hpp"
 
 using namespace std;
 

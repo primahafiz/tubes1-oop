@@ -3,6 +3,10 @@
 
 #include "SlotInventory.hpp"
 #include "../Item/Item.hpp"
+#include "../Exception/DeleteInventoryException.hpp"
+#include "../Exception/InventoryFullException.hpp"
+#include "../Exception/CombineNullItemException.hpp"
+#include "../Exception/CombineDifferentItemException.hpp"
 #include <map>
 #include <algorithm>
 

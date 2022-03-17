@@ -3,8 +3,7 @@
 
 #include <iostream>
 #include "../Item/Item.hpp"
-#include "../Item/Tool.hpp"
-#include "../Item/nonTool.hpp"
+#include "../Exception/DeleteInventoryException.hpp"
 
 using namespace std;
 
