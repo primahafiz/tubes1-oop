@@ -12,6 +12,11 @@ class Crafting{
         Crafting();
         ~Crafting();
 
+        // add sebuah Item pada slot crafting ke i
+        void addToCrafting(Item *a, int i);
+        // delete sebuah Item pada slot crafting ke i
+        void deleteCrafting(int i);
+        Item* getCrafting(int i);
         void printCrafting();
 
 };
