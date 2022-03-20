@@ -11,6 +11,7 @@ class Stone : public nonTool {
 private:
     /* Atribut */
     T stoneType;
+    int quantity;
 public:
     // Default Constructor
     Stone() : nonTool() {
@@ -19,7 +20,7 @@ public:
     }
 
     // User-Defined Constructor
-    Stone(T stoneType) : nonTool(8+stoneType.getId(), plankType.getName(), "STONE", 0) {
+    Stone(T stoneType) : nonTool(8+stoneType.getId(), plankType.getName(), "STONE", quantity) {
         setStoneType(stoneType);
     }
 

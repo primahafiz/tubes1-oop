@@ -11,6 +11,7 @@ class Log : public nonTool {
 private:
     /* Atribut */
     T logType;
+    int quantity;
 public:
     // Default Constructor
     Log() : nonTool() {
@@ -19,7 +20,7 @@ public:
     }
 
     // User-Defined Constructor
-    Log(T logType) : nonTool(1+logType.getId(), logType.getName()+"_LOG", "LOG", 0) {
+    Log(T logType) : nonTool(1+logType.getId(), logType.getName()+"_LOG", "LOG", quantity) {
         setLogType(logType);
     }
 
