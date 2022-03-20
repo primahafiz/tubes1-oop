@@ -8,7 +8,6 @@
 class Diamond : public nonTool {
 private:
     /* Atribut */
-    int quantity;
 public:
     // Default Constructor
     Diamond() : nonTool() {
@@ -16,7 +15,7 @@ public:
     }
 
     // User-Defined Constructor
-    Diamond() : nonTool(12, "DIAMOND", "-", quantity) {
+    Diamond(int quantity) : nonTool(12, "DIAMOND", "-", quantity) {
 
     }
 

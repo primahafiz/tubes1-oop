@@ -8,7 +8,6 @@
 class IronIngot : public nonTool {
 private:
     /* Atribut */
-    int quantity;
 public:
     // Default Constructor
     IronIngot() : nonTool() {
@@ -16,7 +15,7 @@ public:
     }
 
     // User-Defined Constructor
-    IronIngot() : nonTool(10, "IRON_INGOT", "-", quantity) {
+    IronIngot(int quantity) : nonTool(10, "IRON_INGOT", "-", quantity) {
     }
 
     // Setter

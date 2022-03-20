@@ -11,7 +11,6 @@ class Plank : public nonTool {
 private:
     /* Atribut */
     T plankType;
-    int quantity;
 public:
     // Default Constructor
     Plank() : nonTool() {
@@ -20,7 +19,7 @@ public:
     }
 
     // User-Defined Constructor
-    Plank(T plankType) : nonTool(4+plankType.getId(), plankType.getName()+"_PLANK", "PLANK", quantity) {
+    Plank(T plankType, int quantity) : nonTool(4+plankType.getId(), plankType.getName()+"_PLANK", "PLANK", quantity) {
         setPlankType(plankType);
     }
 

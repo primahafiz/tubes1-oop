@@ -8,7 +8,6 @@
 class Stick : public nonTool {
 private:
     /* Atribut */
-    int quantity;
 public:
     // Default Constructor
     Stick() : nonTool() {
@@ -16,7 +15,7 @@ public:
     }
 
     // User-Defined Constructor
-    Stick() : nonTool(4, "STICK", "-", quantity) {
+    Stick(int quantity) : nonTool(4, "STICK", "-", quantity) {
     }
 
     // Setter

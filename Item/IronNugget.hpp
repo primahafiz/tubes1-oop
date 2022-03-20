@@ -8,7 +8,6 @@
 class IronNugget : public nonTool {
 private:
     /* Atribut */
-    int quantity;
 public:
     // Default Constructor
     IronNugget() : nonTool() {
@@ -16,7 +15,7 @@ public:
     }
 
     // User-Defined Constructor
-    IronNugget() : nonTool(11, "IRON_NUGGET", "-", quantity) {
+    IronNugget(int quantity) : nonTool(11, "IRON_NUGGET", "-", quantity) {
     }
 
     // Setter

@@ -10,8 +10,7 @@ template <class T>
 class Log : public nonTool {
 private:
     /* Atribut */
-    T logType;
-    int quantity;
+    T logType
 public:
     // Default Constructor
     Log() : nonTool() {
@@ -20,7 +19,7 @@ public:
     }
 
     // User-Defined Constructor
-    Log(T logType) : nonTool(1+logType.getId(), logType.getName()+"_LOG", "LOG", quantity) {
+    Log(T logType, int quantity) : nonTool(1+logType.getId(), logType.getName()+"_LOG", "LOG", quantity) {
         setLogType(logType);
     }
 
