@@ -3,53 +3,82 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <map>
 #include "headd.hpp"
 
 using namespace std;
 
-map<string, int *> recipe;
-
 // ini nanti pindahin aja ke main.hpp
-void readConfig()
+void readConfig(map<pair<string,int>,string> &recipe)
 {
   string configPath = "./config";
   for (const auto &entry : filesystem::directory_iterator(configPath + "/recipe"))
   {
-    cout << entry.path() << endl;
+
+    ifstream checkLine(entry.path());
+
+    int numLine=0;
+    for(string line;getline(checkLine,line);){
+      numLine++;
+    }
+
     ifstream recipeConfigFile(entry.path());
+
+    string ret="";
+    string infoItem="";
+    int num=0;
+
+    int iter = 0;
+
     for (string line; getline(recipeConfigFile, line);)
     {
-      // cout << line << endl;
-      // do something
+        iter++;
+
+        if(iter==1)continue;
+
+        int n=line.size();
+        if(iter!=numLine){
+          for(int i=0;i<n;i++){
+              if(line[i]==' ')continue;
+              ret+=line[i];
+          }
+        }else{
+          for(int i=0;i<n;i++){
+            if(line[i]==' ')break;
+            infoItem+=line[i];
+          }
+          int mul=1;
+          for(int i=n-1;i>=0;i--){
+            if(line[i]==' ')break;
+            num+=(line[i]-'0')*mul;
+            mul*=10;
+          }
+        }
     }
+    int nRes=ret.size();
+    for(int i=nRes-1;i>=0;i--){
+      if(ret[i]!='-'){
+        ret=ret.substr(0,i+1);
+        break;
+      }
+    }
+    recipe[{infoItem,num}]=ret;
   }
 }
 
 int main()
 {
-  readConfig();
+  map<pair<string,int>,string> recipe;
   Inventory Itory = Inventory();
   Crafting Craft = Crafting();
-  string configPath = "./config";
-  string itemConfigPath = configPath + "/item.txt";
 
-  // read item from config file
-  ifstream itemConfigFile(itemConfigPath);
+  readConfig(recipe);
 
-  for (string line; getline(itemConfigFile, line);)
-  {
-    // cout << line << endl;
-    // do something
+  for(auto x:recipe){
+    cout<<(x.first).first<<" "<<(x.first).second<<endl;
+    cout<<x.second<<endl;
   }
-
-  // read recipes
-  for (const auto &entry :
-       filesystem::directory_iterator(configPath + "/recipe"))
-  {
-    // cout << entry.path() << endl;
-    // read from file and do something
-  }
-
+  
   // sample interaction
   string command;
   while (cin >> command)
