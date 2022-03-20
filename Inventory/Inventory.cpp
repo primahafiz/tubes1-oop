@@ -48,6 +48,11 @@ void Inventory::deleteFromInventory(string ID,int num){
         }
     }
 }
+
+Item* Inventory::getInventory(int k){
+    return this->inventory[k].getSlotItem();
+}
+
 void Inventory::combineTwoItem(string IDSrc,string IDDest){
     int slotId1=this->parsingID(IDSrc);
     int slotId2=this->parsingID(IDDest);

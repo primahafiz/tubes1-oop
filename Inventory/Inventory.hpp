@@ -19,6 +19,7 @@ class Inventory{
 
         void addToInventory(Item *a);
         void deleteFromInventory(string ID,int num);
+        Item* getInventory(int k);
         void combineTwoItem(string IDSrc,string IDDest);
         void exportInventory();
         void printInventory();
