@@ -19,7 +19,7 @@ public:
     }
 
     // User-Defined Constructor
-    Stone(T stoneType, int quantity) : nonTool(8+stoneType.getId(), plankType.getName(), "STONE", quantity) {
+    Stone(T stoneType, int quantity) : nonTool(8+stoneType.getId(), stoneType.getName(), "STONE", quantity) {
         setStoneType(stoneType);
     }
 

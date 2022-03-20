@@ -76,7 +76,7 @@ int main()
       // Dibandingkan berdasarkan ID
       cin >> itemID >> itemQty;
       Item *temp = new Diamond();
-      temp.modifyQuantity(-itemQty);
+      temp->modifyQuantity(-itemQty);
     }
     else if (command == "MOVE")
     {
@@ -92,7 +92,7 @@ int main()
       string ToolID;
       cin >> ToolID;
       Item *temp = new Diamond();
-      temp.modifyQuantity(-1);
+      temp->modifyQuantity(-1);
     }
     else if (command == "CRAFT")
     {

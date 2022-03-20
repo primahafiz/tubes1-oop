@@ -10,7 +10,7 @@ template <class T>
 class Log : public nonTool {
 private:
     /* Atribut */
-    T logType
+    T logType;
 public:
     // Default Constructor
     Log() : nonTool() {
