@@ -66,8 +66,15 @@ void Crafting::symmetry(){
     swap(6, 8);
 }
 
+
 bool Crafting::isCraftable(string X){
     string crafting = "";
+    string crafting2 = "";
+    Crafting craft2 = *this;
+    craft2.symmetry();
+
+    cout << "hellllllllllooooooo" << endl;
+
     for (int i = 0; i < 9; i++){
         if (isCraftingEmpty(i)){
             crafting += "-";
@@ -76,13 +83,28 @@ bool Crafting::isCraftable(string X){
         }
     }
 
+    cout << "haaaaaaaaaaaaaaaiii" << endl;
+
+    for (int i = 0; i < 9; i++){
+        if (craft2.isCraftingEmpty(i)){
+            crafting2 += "-";
+        } else {
+            crafting2 += craft2.getCrafting(i)->getName();
+        }
+    }    
+
+    //return crafting2;
+    cout << "kekekkekekekekekekk" << endl;
     size_t found = crafting.find(X);
-    /* size_t found2 = crafting.find(X); */
-    if (found != string::npos /*|| found2 != string::npos */){ // kalo ada pattern yang cocok
+    size_t found2 = crafting2.find(X);
+    cout << "yooooooooooooooooooooooo" << endl;
+    if (found != string::npos || found2 != string::npos ){ // kalo ada pattern yang cocok
         return true;
     } else {
         return false;
     }
+    
+
 }
 
 int Crafting::totalDurability(){
