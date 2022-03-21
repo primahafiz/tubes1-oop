@@ -25,6 +25,7 @@ void Inventory::addToInventory(Item *a){
             for(int i=0;i<27;i++){
                 if(inventory[i].isSlotEmpty()){
                     inventory[i].addSlot(a);
+                    break;
                 }
             }
         }else{
@@ -41,6 +42,14 @@ void Inventory::addToInventory(Item *a){
                 inventory[i]=new nonTool(a->getID(),a->getName(),a->getType(),toAdd+inventory[i].getSlotItem()->getQuantity());
             }
         }
+        for(int i=0;i<27;i++){
+            if(cur==0)break;
+            if(inventory[i].isSlotEmpty()){
+                int toAdd=min(cur,64);
+                cur-=toAdd;
+                inventory[i]=new nonTool(a->getID(),a->getName(),a->getType(),toAdd);
+            }
+        }
     }else{
         throw InventoryFullException();
     }
@@ -50,17 +59,18 @@ int Inventory::getAvailableSlot(Item *a){
     int res=0;
     if(a->isTool()){
         for(int i=0;i<27;i++){
-            if(a->getName()==this->inventory[i].getSlotItem()->getName()){
+            if(this->inventory[i].isSlotEmpty()){
                 res++;
             }
         }
-    }
-    for(int i=0;i<27;i++){
-        if(this->inventory[i].isSlotEmpty()){
-            res+=64;
-        }else{
-            if(a->getName()==this->inventory[i].getSlotItem()->getName()){
-                res+=64-this->inventory[i].getSlotItem()->getQuantity();
+    }else{
+        for(int i=0;i<27;i++){
+            if(this->inventory[i].isSlotEmpty()){
+                res+=64;
+            }else{
+                if(a->getName()==this->inventory[i].getSlotItem()->getName()){
+                    res+=64-this->inventory[i].getSlotItem()->getQuantity();
+                }
             }
         }
     }
@@ -112,11 +122,11 @@ void Inventory::exportInventory(string path){
     inventoryFile.open(path);
     for(int i=0;i<27;i++){
         if(inventory[i].isSlotEmpty()){
-            inventoryFile<<"EMPTY\n";
+            inventoryFile<<"0:0\n";
         }else{
-            inventoryFile<<inventory[i].getSlotItem()->getName()<<" ";
+            inventoryFile<<inventory[i].getSlotItem()->getID()<<":";
             if(inventory[i].getSlotItem()->isTool()){
-                inventoryFile<<1;
+                inventoryFile<<inventory[i].getSlotItem()->getDurability();
             }else{
                 inventoryFile<<inventory[i].getSlotItem()->getQuantity();
             }
