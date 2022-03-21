@@ -1,157 +1,178 @@
-#include "Crafting.hpp"
-#include <string>
+#include"Crafting.hpp"
+#include<string>
+#include<vector>
 
-Crafting::Crafting()
-{
-    for (int i = 0; i < 9; i++)
-    {
+Crafting::Crafting(){
+    for (int i = 0; i < 9; i++){
         crafting[i] = SlotCrafting();
     }
 }
 
-// Crafting::Crafting(const Crafting &c)
-// {
-//     for (int i = 0; i < 9; i++)
-//     {
-//         crafting[i] = SlotCrafting(c.getCrafting(i));
-//     }
-// }
+Crafting::~Crafting(){
 
-Crafting::~Crafting()
-{
-}
-
-Item *Crafting::getCrafting(int i)
-{
-    return crafting[i].getSlotCraftingItem();
 }
 
 // add sebuah Item pada slot crafting ke i
-void Crafting::addToCrafting(Item *a, int i)
-{
-    if (this->crafting[i].isSlotCraftingEmpty())
-    {
+void Crafting::addToCrafting(Item *a, int i){
+    if (this->crafting[i].isSlotCraftingEmpty()){
         crafting[i].addSlotCrafting(a);
-    }
-    else
-    {
+    } else {
         // exception
     }
 }
 
 // delete sebuah Item pada slot crafting ke i
-void Crafting::deleteCrafting(int i)
-{
-    if (!this->crafting[i].isSlotCraftingEmpty())
-    {
+void Crafting::deleteCrafting(int i){
+    if (!this->crafting[i].isSlotCraftingEmpty()){
         crafting[i].dropSlotCrafting();
-    }
-    else
-    {
+    } else {
         // exception
     }
 }
 
+// mengambil item pada slot crafting ke i
+Item* Crafting::getCrafting(int i){
+    return crafting[i].getSlotCraftingItem();
+}
+
 // clear crafting
-void Crafting::clearCrafting()
-{
-    for (int i = 0; i < 9; i++)
-    {
+void Crafting::clearCrafting(){
+    for (int i = 0; i < 9; i++){
         deleteCrafting(i);
     }
 }
 
-bool Crafting::isCraftingEmpty(int i)
-{
+// cek apakah slot crafting ke i kosong
+bool Crafting::isCraftingEmpty(int i){
     return crafting[i].isSlotCraftingEmpty();
 }
 
-void Crafting::swap(int i, int j)
-{
+// swap position item i and j, untuk symmetry
+void Crafting::swap(int i, int j){
     Item *a = getCrafting(j);
     deleteCrafting(j);
-    addToCrafting(getCrafting(i), j);
+    addToCrafting(getCrafting(i),j);
     deleteCrafting(i);
-    addToCrafting(a, i);
+    addToCrafting(a,i);     
 }
 
-void Crafting::symmetry()
-{
+// membuat resep crafting yang direfleksi terhadap sumbu  y
+void Crafting::symmetry(){
     swap(0, 2);
     swap(3, 5);
     swap(6, 8);
 }
 
-bool Crafting::isCraftable(string X)
-{
+// mengubah crafting slot menjadi string
+string Crafting::getStringCrafting(){
     string crafting = "";
-    string crafting2 = "";
-    Crafting craft2 = *this;
-    craft2.symmetry();
 
-    cout << "hellllllllllooooooo" << endl;
-
-    for (int i = 0; i < 9; i++)
-    {
-        if (isCraftingEmpty(i))
-        {
+    for (int i = 0; i < 9; i++){
+        if (isCraftingEmpty(i)){
             crafting += "-";
-        }
-        else
-        {
+        } else {
             crafting += getCrafting(i)->getName();
         }
     }
 
-    cout << "haaaaaaaaaaaaaaaiii" << endl;
+    return crafting;
+}
 
-    for (int i = 0; i < 9; i++)
-    {
-        if (craft2.isCraftingEmpty(i))
-        {
-            crafting2 += "-";
-        }
-        else
-        {
-            crafting2 += craft2.getCrafting(i)->getName();
-        }
-    }
+// helper function
+bool Crafting::Craftable (string X){
+    string crafting = getStringCrafting();
 
-    // return crafting2;
-    cout << "kekekkekekekekekekk" << endl;
     size_t found = crafting.find(X);
-    size_t found2 = crafting2.find(X);
-    cout << "yooooooooooooooooooooooo" << endl;
-    if (found != string::npos || found2 != string::npos)
-    { // kalo ada pattern yang cocok
+    if (found != string::npos){ 
         return true;
-    }
-    else
-    {
+    } else {
         return false;
     }
 }
 
-int Crafting::totalDurability()
-{
+// helper function
+bool Crafting::CraftableSymmetry (string X){
+    symmetry();
+    string crafting = getStringCrafting();
+    symmetry();
+
+    size_t found = crafting.find(X);
+    if (found != string::npos){ 
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// mengecek apakah craftable
+bool Crafting::isCraftable(string X){
+    bool craftable = false;
+
+    if (Craftable(X) || CraftableSymmetry(X)){
+        craftable = true;
+    }
+
+    return craftable;
+}
+
+// return total durability dari item yang ada di crafting
+int Crafting::totalDurability(){
     int total = 0;
-    for (int i = 0; i < 9; i++)
-    {
-        if (!isCraftingEmpty(i) && getCrafting(i)->isTool())
-        {
+    for (int i = 0; i < 9; i++){
+        if(!isCraftingEmpty(i) && getCrafting(i)->isTool()){
             total += getCrafting(i)->getDurability();
         }
     }
     return total;
 }
 
-void Crafting::printCrafting()
-{
-    for (int i = 0; i < 9; i++)
-    {
+// mengecek apakah slot selain indeks a dan b kosong
+bool Crafting::isOtherThanEmpty(int a, int b){
+    bool empty = true;
+    for (int i = 0; i < 9; i++){
+        if (i != a || i != b){
+            if (!isCraftingEmpty(i)){
+                empty = false;
+            }
+        }
+    }
+    return empty;
+}
+
+// mengecek apakah kedua item tool craftable
+bool Crafting::isToolCraftable(){
+    int countTool = 0;
+    bool craftable = false;
+    vector<int> idx;
+
+    for (int i = 0; i < 9; i++){
+        if (getCrafting(i)->isTool()){
+            countTool += 1;
+            idx.push_back(i);
+        }
+    }
+    // ngecek tipenya sama dan yang lain kosong ga, kalo kosong 
+    if (countTool == 2){
+        if (getCrafting(idx[0])->getType() == getCrafting(idx[1])->getType()){
+            if (isOtherThanEmpty(idx[0], idx[1])){
+                craftable = true;
+            }
+        }
+    } 
+
+    return true;
+}
+
+// crafting kedua item tool
+void Crafting::getToolCraftable(){
+
+}
+
+// print slot crafting
+void Crafting::printCrafting(){
+    for (int i = 0; i < 9; i++){
         crafting[i].printSlotCrafting();
-        if (i == 2 || i == 5 || i == 8)
-        {
+        if (i == 2 || i == 5 || i == 8){
             cout << "\n";
         }
     }
