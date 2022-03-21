@@ -4,7 +4,7 @@
 #include "Crafting/Crafting.hpp"
 #include "Crafting/SlotCrafting.hpp"
 #include "Inventory/Inventory.hpp"
-#include "Inventory/SlotInventory.hpp"
+// #include "Inventory/SlotInventory.hpp"
 #include "Item/Axe.hpp"
 #include "Item/Diamond.hpp"
 #include "Item/IronIngot.hpp"
