@@ -5,7 +5,7 @@
 #include <string>
 using namespace std;
 
-class Wooden {
+class WoodenType {
     private:
         string name;
         int id;
@@ -32,7 +32,7 @@ class Wooden {
         }
 };
 
-class Stone {
+class StoneType {
     private:
         string name;
         int id;
@@ -59,7 +59,7 @@ class Stone {
         }
 };
 
-class Iron {
+class IronType {
     private:
         string name;
         int id;
@@ -86,7 +86,7 @@ class Iron {
         }
 };
 
-class Diamond {
+class DiamondType {
     private:
         string name;
         int id;

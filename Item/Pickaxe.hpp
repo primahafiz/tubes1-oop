@@ -3,7 +3,7 @@
 #define __PICKAXE_HPP__
 
 #include "Tool.hpp"
-// #include "ToolType.hpp"
+#include "ToolType.hpp"
 
 /* Kelas Pickaxe */
 template <class T>
