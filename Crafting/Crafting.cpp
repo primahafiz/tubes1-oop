@@ -16,8 +16,6 @@ Crafting::~Crafting(){
 void Crafting::addToCrafting(Item *a, int i){
     if (this->crafting[i].isSlotCraftingEmpty()){
         crafting[i].addSlotCrafting(a);
-    } else {
-        // exception
     }
 }
 
@@ -25,8 +23,6 @@ void Crafting::addToCrafting(Item *a, int i){
 void Crafting::deleteCrafting(int i){
     if (!this->crafting[i].isSlotCraftingEmpty()){
         crafting[i].dropSlotCrafting();
-    } else {
-        // exception
     }
 }
 
