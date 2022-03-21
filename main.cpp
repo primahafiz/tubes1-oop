@@ -79,16 +79,53 @@ void readConfig(map<pair<string, int>, string> &recipe)
   }
 }
 
+Item* getItemFromString(string s,int num){
+  if(s=="DIAMOND"){
+    return new Diamond(num);
+    
+  }
+}
+
 
 int main()
 {
   map<pair<string, int>, string> recipe;
   readConfig(recipe);
-  for(auto x:recipe){
-    cout<<(x.first).first<<" "<<(x.first).second<<endl;
-    cout<<x.second<<endl;
-    cout<<endl;
-  }
+
+  map<string,Item> getItem;
+  getItem["IRON_INGOT"]=new IronIngot();
+  getItem["DIAMOND"]=new Diamond();
+
+  string s="IRON_INGOT";
+
+  Item *res=new getItem[s];
+  res->modifyQuantity(num);
+
+
+  // Crafting craft=new Crafting();
+  // for(auto x:recipe){
+  //   cout<<(x.first).first<<" "<<(x.first).second<<endl;
+  //   cout<<x.second<<endl;
+    Crafting craft3 = craft;
+    craft3=craft2;
+  //   craft3.symmetry();
+  //   Item *res;
+  //   if (craft.isCraftable(x.second))
+  //     string item = x.first.first;
+  //     int num=x.first.second;
+  //     if(item=="DIAMOND"){
+  //       res=new Diamond(num);
+  //     }else if()
+  //   else if(craft3.isCraftable(x.second)){
+  //     string item = craft3.getCraft(x.first,x.second);
+  //   }
+  //     break;
+    
+  //   cout<<endl;
+  // }
+  if craft.isCraftableTool():
+    // delete isinya di craft
+    craft.getcraftedtool();
   // Inventory Itory = Inventory();
   // Crafting Craft = Crafting();
   // string configPath = "./config";

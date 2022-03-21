@@ -2,7 +2,10 @@
 #define INVENTORY_H
 
 #include "SlotInventory.hpp"
+#include <fstream>
+#include <string>
 #include "../Item/Item.hpp"
+#include "../Item/nonTool.hpp"
 #include "../Exception/DeleteInventoryException.hpp"
 #include "../Exception/InventoryFullException.hpp"
 #include "../Exception/CombineNullItemException.hpp"
@@ -12,16 +15,18 @@
 
 class Inventory{
     private:
-        map<int,SlotInventory>inventory;
+        SlotInventory* inventory;
     public:
         Inventory();
         ~Inventory();
+        Inventory(const Inventory&);
 
         void addToInventory(Item *a);
+        int getAvailableSlot(Item *a);
         void deleteFromInventory(string ID,int num);
         Item* getInventory(int k);
         void combineTwoItem(string IDSrc,string IDDest);
-        void exportInventory();
+        void exportInventory(string path);
         void printInventory();
         int parsingID(string ID);
 };

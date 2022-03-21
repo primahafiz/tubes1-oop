@@ -2,34 +2,71 @@
 
 
 Inventory::Inventory(){
+    this->inventory=new SlotInventory[27];
     for(int i=0;i<27;i++){
         inventory[i]=SlotInventory();
     }
 }
 Inventory::~Inventory(){
-    //
+    delete[] this->inventory;
+}
+
+Inventory::Inventory(const Inventory& a){
+    delete[] this->inventory;
+    this->inventory=new SlotInventory[27];
+    for(int i=0;i<27;i++){
+        inventory[i]=a.inventory[i];
+    }
 }
 
 void Inventory::addToInventory(Item *a){
-    if(!a->isTool()){
+    if(a->isTool()){
+        if(this->getAvailableSlot(a)){
+            for(int i=0;i<27;i++){
+                if(inventory[i].isSlotEmpty()){
+                    inventory[i].addSlot(a);
+                }
+            }
+        }else{
+            throw InventoryFullException();
+        }
+    }else if(this->getAvailableSlot(a)>=a->getQuantity()){
+        int cur=a->getQuantity();
         for(int i=0;i<27;i++){
             if(inventory[i].isSlotEmpty())continue;
             if(inventory[i].getSlotItem()->getName()==a->getName()){
-                if(inventory[i].canBeAdded(a->getQuantity())){
-                    inventory[i].addQuantity(a->getQuantity());
-                    return;
-                }
+                if(cur==0)break;
+                int toAdd=min(cur,64-inventory[i].getSlotItem()->getQuantity());
+                cur-=toAdd;
+                inventory[i]=new nonTool(a->getID(),a->getName(),a->getType(),toAdd+inventory[i].getSlotItem()->getQuantity());
+            }
+        }
+    }else{
+        throw InventoryFullException();
+    }
+}
+
+int Inventory::getAvailableSlot(Item *a){
+    int res=0;
+    if(a->isTool()){
+        for(int i=0;i<27;i++){
+            if(a->getName()==this->inventory[i].getSlotItem()->getName()){
+                res++;
             }
         }
     }
     for(int i=0;i<27;i++){
-        if(inventory[i].isSlotEmpty()){
-            inventory[i].addSlot(a);
-            return;
+        if(this->inventory[i].isSlotEmpty()){
+            res+=64;
+        }else{
+            if(a->getName()==this->inventory[i].getSlotItem()->getName()){
+                res+=64-this->inventory[i].getSlotItem()->getQuantity();
+            }
         }
     }
-    throw InventoryFullException();
+    return res;
 }
+
 void Inventory::deleteFromInventory(string ID,int num){
     int slotId=this->parsingID(ID);
     if(inventory[slotId].isSlotEmpty()){
@@ -70,16 +107,29 @@ void Inventory::combineTwoItem(string IDSrc,string IDDest){
         throw CombineDifferentItemException();
     }
 }
-void Inventory::exportInventory(){
-    //
+void Inventory::exportInventory(string path){
+    ofstream inventoryFile;
+    inventoryFile.open(path);
+    for(int i=0;i<27;i++){
+        if(inventory[i].isSlotEmpty()){
+            inventoryFile<<"EMPTY\n";
+        }else{
+            inventoryFile<<inventory[i].getSlotItem()->getName()<<" ";
+            if(inventory[i].getSlotItem()->isTool()){
+                inventoryFile<<1;
+            }else{
+                inventoryFile<<inventory[i].getSlotItem()->getQuantity();
+            }
+            inventoryFile<<"\n";
+        }
+    }
+    inventoryFile.close();
 }
 void Inventory::printInventory(){
     for(int i=0;i<27;i++){
         inventory[i].printSlot();
         if((i+1)%9==0){
             cout<<endl;
-        }else{
-            cout<<" ";
         }
     }
 }

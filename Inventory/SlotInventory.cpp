@@ -54,3 +54,17 @@ void SlotInventory::printSlot(){
         cout<<"["<<this->slotItem->getID()<<"]";
     }
 }
+
+// void SlotInventory::printSlot(){
+//     if(this->slotItem==NULL){
+//         cout<<"EMPTY";
+//     }else{
+//         cout<<"Item "<<this->slotItem->getID()<<" (";
+//         if(this->slotItem->isTool()){
+//             cout<<1;
+//         }else{
+//             cout<<this->slotItem->getQuantity();
+//         }
+//         cout<<")";
+//     }
+// }
