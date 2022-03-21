@@ -3,7 +3,7 @@
 #define __SWORD_HPP__
 
 #include "Tool.hpp"
-// #include "ToolType.hpp"
+#include "ToolType.hpp"
 
 /* Kelas Sword */
 template <class T>

@@ -3,7 +3,7 @@
 #define __AXE_HPP__
 
 #include "Tool.hpp"
-// #include "ToolType.hpp"
+#include "ToolType.hpp"
 
 /* Kelas Axe */
 template <class T>
