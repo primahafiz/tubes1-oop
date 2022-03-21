@@ -49,7 +49,7 @@ public:
         // mengecek apakah kedua item tool craftable
         bool isToolCraftable();
         // crafting kedua item tool
-        void getToolCraftable();
+        Item* getToolCraftable();
 
         // print slot crafting
         void printCrafting();

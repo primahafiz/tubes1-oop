@@ -130,7 +130,7 @@ int Crafting::totalDurability(){
 bool Crafting::isOtherThanEmpty(int a, int b){
     bool empty = true;
     for (int i = 0; i < 9; i++){
-        if (i != a || i != b){
+        if (i != a && i != b){
             if (!isCraftingEmpty(i)){
                 empty = false;
             }
@@ -146,26 +146,51 @@ bool Crafting::isToolCraftable(){
     vector<int> idx;
 
     for (int i = 0; i < 9; i++){
-        if (getCrafting(i)->isTool()){
-            countTool += 1;
-            idx.push_back(i);
+        if (!isCraftingEmpty(i)){
+            if (getCrafting(i)->isTool()){
+                countTool += 1;
+                cout << i << endl;
+                idx.push_back(i);
+            }            
         }
     }
-    // ngecek tipenya sama dan yang lain kosong ga, kalo kosong 
+
     if (countTool == 2){
         if (getCrafting(idx[0])->getType() == getCrafting(idx[1])->getType()){
-            if (isOtherThanEmpty(idx[0], idx[1])){
+            if (isOtherThanEmpty(idx[0], idx[1])){               
                 craftable = true;
             }
         }
     } 
 
-    return true;
+    return craftable;
 }
 
 // crafting kedua item tool
-void Crafting::getToolCraftable(){
+Item* Crafting::getToolCraftable(){
+    int countTool = 0;
+    vector<int> idx;
 
+    for (int i = 0; i < 9; i++){
+        if (!isCraftingEmpty(i)){
+            if (getCrafting(i)->isTool()){
+                countTool += 1;
+                cout << i << endl;
+                idx.push_back(i);
+            }            
+        }
+    }
+        
+    int id = getCrafting(idx[0])->getID();
+    string name = getCrafting(idx[0])->getName();
+    string type = getCrafting(idx[0])->getType();
+    int oriDurability = (getCrafting(idx[0])->getDurability() + getCrafting(idx[0])->getDurability());
+    int durability = min(10, oriDurability);
+
+    Item* tool = new Tool(id, name, type, durability);
+
+    clearCrafting();
+    return tool;
 }
 
 // print slot crafting
