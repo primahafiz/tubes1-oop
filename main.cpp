@@ -1,61 +1,12 @@
 // sample main file, replace this with your own code
-#include "main.hpp"
+#include "head.hpp"
 
 int main()
 {
   map<pair<string, int>, string> recipe;
   readConfig(recipe);
-
-  // map<string, Item> getItem;
-  // Crafting craft = new Crafting();
-  // for (auto x : recipe)
-  // {
-  //   cout << (x.first).first << " " << (x.first).second << endl;
-  //   cout << x.second << endl;
-  //   Crafting craft3 = craft;
-  //   craft3 = craft2;
-  //   craft3.symmetry();
-  //   Item *res;
-  //   if (craft.isCraftable(x.second))
-  //     string item = x.first.first;
-  //   int num = x.first.second;
-  //   if (item == "DIAMOND")
-  //   {
-  //     res = new Diamond(num);
-  //   }
-  //   else if ()
-  //     else if (craft3.isCraftable(x.second))
-  //     {
-  //       string item = craft3.getCraft(x.first, x.second);
-  //     }
-  //   break;
-
-  //   cout << endl;
-  // }
-  // if craft
-  //   .isCraftableTool() : // delete isinya di craft
-  //                        craft.getcraftedtool();
   Inventory Itory = Inventory();
   Crafting Craft = Crafting();
-  string configPath = "./config";
-  string itemConfigPath = configPath + "/item.txt";
-
-  // read item from config file
-  ifstream itemConfigFile(itemConfigPath);
-
-  for (string line; getline(itemConfigFile, line);)
-  {
-    // cout << line << endl;
-    // do something
-  }
-
-  // // read recipes
-  for (const auto &entry :
-       filesystem::directory_iterator(configPath + "/recipe"))
-  {
-    cout << entry.path() << endl;
-    // read from file and do something
-  }
 
   // sample interaction
   string command;
@@ -119,24 +70,31 @@ int main()
         }
         else
         {
-          if (Itory.getInventory(StringToInt(slotSrc))->getQuantity() >= slotQty)
-          {
-            for (int i = 0; i < slotQty; i++)
-            {
-              cin >> slotDest;
-              Dest.push_back(slotDest);
-            }
-            Dest.push_back("0");
-            for (int j = 0; j < slotQty; j++)
-            {
-              Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(Dest.front()));
-              Dest.pop_front();
-            }
-            Itory.deleteFromInventory(to_string(StringToInt(slotSrc)), slotQty);
+          if(Itory.getInventory(StringToInt(slotSrc))!=NULL){
+            if(!Itory.getInventory(StringToInt(slotSrc))->isTool()){
+                if (Itory.getInventory(StringToInt(slotSrc))->getQuantity() >= slotQty)
+                {
+                  for (int i = 0; i < slotQty; i++)
+                  {
+                    cin >> slotDest;
+                    Dest.push_back(slotDest);
+                  }
+                  for (int j = 0; j < slotQty; j++)
+                  {
+                    Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(Dest.front()));
+                    Dest.pop_front();
+                  }
+                  Itory.deleteFromInventory(slotSrc, slotQty);
+                }else{
+                  cout<<"Item tidak cukup"<<endl;
+                }
+              }else{
+                cout<<"Item bukan Non Tool"<<endl;
+              }
           }
           else
           {
-            cout << "Tidak cukup!" << endl;
+            cout << "Inventory kosong" << endl;
           }
         }
       }
@@ -145,9 +103,8 @@ int main()
         cin >> slotDest;
         if (slotDest.front() == 'I')
         {
-          int x = slotSrc.back() - '0';
-          int y = slotDest.back() - '0';
-          Itory.addToInventory(to_string(x), Craft.getCrafting(y));
+          int y = StringToInt(slotSrc);
+          Itory.addToInventory(slotDest, Craft.getCrafting(y));
           Craft.deleteCrafting(y);
         }
         else

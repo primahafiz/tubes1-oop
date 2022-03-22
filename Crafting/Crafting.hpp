@@ -4,6 +4,7 @@
 #include "SlotCrafting.hpp"
 #include "../Item/Item.hpp"
 #include "../Item/Tool.hpp"
+#include "../util.hpp"
 #include <map>
 #include <string>
 

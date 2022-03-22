@@ -15,7 +15,9 @@ Crafting::~Crafting(){
 // add sebuah Item pada slot crafting ke i
 void Crafting::addToCrafting(Item *a, int i){
     if (this->crafting[i].isSlotCraftingEmpty()){
-        crafting[i].addSlotCrafting(a);
+        crafting[i].addSlotCrafting(getItemFromString(a->getName(),1));
+    }else{
+        // throw exception
     }
 }
 
@@ -45,11 +47,23 @@ bool Crafting::isCraftingEmpty(int i){
 
 // swap position item i and j, untuk symmetry
 void Crafting::swap(int i, int j){
-    Item *a = getCrafting(j);
-    deleteCrafting(j);
-    addToCrafting(getCrafting(i),j);
-    deleteCrafting(i);
-    addToCrafting(a,i);     
+    if(this->crafting[i].isSlotCraftingEmpty() || this->crafting[i].isSlotCraftingEmpty()){
+        if(this->crafting[i].isSlotCraftingEmpty() && this->crafting[i].isSlotCraftingEmpty()){
+            //
+        }else if(this->crafting[i].isSlotCraftingEmpty()){
+            addToCrafting(getCrafting(j),i);
+            deleteCrafting(j);
+        }else{
+            addToCrafting(getCrafting(i),j);
+            deleteCrafting(i);
+        }
+    }else{
+        Item *a = getCrafting(j);
+        deleteCrafting(j);
+        addToCrafting(getCrafting(i),j);
+        deleteCrafting(i);
+        addToCrafting(a,i);
+    }
 }
 
 // membuat resep crafting yang direfleksi terhadap sumbu  y
@@ -59,7 +73,6 @@ void Crafting::symmetry(){
     swap(6, 8);
 }
 
-// mengubah crafting slot menjadi string
 string Crafting::getStringCrafting(){
     string crafting = "";
 
@@ -67,7 +80,11 @@ string Crafting::getStringCrafting(){
         if (isCraftingEmpty(i)){
             crafting += "-";
         } else {
-            crafting += getCrafting(i)->getName();
+            if(getCrafting(i)->getType() != "-"){
+                crafting += getCrafting(i)->getName();                
+            } else {
+                crafting += getCrafting(i)->getType();                
+            }
         }
     }
 
@@ -77,9 +94,8 @@ string Crafting::getStringCrafting(){
 // helper function
 bool Crafting::Craftable (string X){
     string crafting = getStringCrafting();
-
     size_t found = crafting.find(X);
-    if (found != string::npos){ 
+    if (found != string::npos){
         return true;
     } else {
         return false;
@@ -103,6 +119,7 @@ bool Crafting::CraftableSymmetry (string X){
 // mengecek apakah craftable
 bool Crafting::isCraftable(string X){
     bool craftable = false;
+
 
     if (Craftable(X) || CraftableSymmetry(X)){
         craftable = true;
