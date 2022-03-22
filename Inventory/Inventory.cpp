@@ -20,10 +20,12 @@ Inventory::Inventory(const Inventory& a){
 }
 
 void Inventory::addToInventory(Item *a){
+    cout<<"x"<<endl;
     if(a->isTool()){
         if(this->getAvailableSlot(a)){
             for(int i=0;i<27;i++){
                 if(inventory[i].isSlotEmpty()){
+                    cout<<i<<endl;
                     inventory[i].addSlot(a);
                     break;
                 }
@@ -47,7 +49,7 @@ void Inventory::addToInventory(Item *a){
             if(inventory[i].isSlotEmpty()){
                 int toAdd=min(cur,64);
                 cur-=toAdd;
-                inventory[i]=new nonTool(a->getID(),a->getName(),a->getType(),toAdd);
+                inventory[i].addSlot(new nonTool(a->getID(),a->getName(),a->getType(),toAdd));
             }
         }
     }else{
