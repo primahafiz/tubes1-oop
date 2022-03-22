@@ -3,8 +3,8 @@
 
 int main()
 {
-  // map<pair<string, int>, string> recipe;
-  // readConfig(recipe);
+  map<pair<string, int>, string> recipe;
+  readConfig(recipe);
 
   // map<string, Item> getItem;
   // Crafting craft=new Crafting();
@@ -49,7 +49,7 @@ int main()
   for (const auto &entry :
        filesystem::directory_iterator(configPath + "/recipe"))
   {
-    // cout << entry.path() << endl;
+    cout << entry.path() << endl;
     // read from file and do something
   }
 
@@ -145,9 +145,10 @@ int main()
         cin >> slotDest;
         if (slotDest.front() == 'I')
         {
-          int x = slotDest.back() - '0';
-          Itory.addToInventory(Craft.getCrafting(x));
-          Craft.deleteCrafting(x);
+          int x = slotSrc.back() - '0';
+          int y = slotDest.back() - '0';
+          Itory.addToInventory(to_string(x), Craft.getCrafting(y));
+          Craft.deleteCrafting(y);
         }
         else
         {
@@ -171,26 +172,17 @@ int main()
         }
       }
     }
-    // else if (command == "CRAFT")
-    // {
-    //   cout << "TODO" << endl;
-    // }
-    // else if (command == "EXPORT")
-    // {
-    //   string outputPath;
-    //   cin >> outputPath;
-    //   ofstream outputFile(outputPath);
-
-    //   // hardcode for first test case
-    //   outputFile << "21:10" << endl;
-    //   outputFile << "6:1" << endl;
-    //   for (int i = 2; i < 27; i++)
-    //   {
-    //     outputFile << "0:0" << endl;
-    //   }
-
-    //   cout << "Exported" << endl;
-    // }
+    else if (command == "CRAFT")
+    {
+      cout << "TODO" << endl;
+    }
+    else if (command == "EXPORT")
+    {
+      string outputPath;
+      cin >> outputPath;
+      Itory.exportInventory(outputPath);
+      cout << "Exported" << endl;
+    }
     else if (command == "EXIT")
     {
       break;
