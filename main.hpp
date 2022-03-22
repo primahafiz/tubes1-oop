@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <list>
 #include "head.hpp"
 using namespace std;
 
@@ -197,10 +198,6 @@ Item *getItemFromString(string s, int num)
     {
         DiamondType DIAMOND;
         return new Pickaxe(DIAMOND);
-    }
-    else
-    {
-        cout << "Item tidak ada!" << endl;
     }
     return 0;
 }

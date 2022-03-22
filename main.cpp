@@ -53,7 +53,7 @@ int main()
     // read from file and do something
   }
 
-  // // sample interaction
+  // sample interaction
   string command;
   while (cin >> command)
   {
@@ -80,56 +80,94 @@ int main()
       }
       else
       {
-        Itory.deleteFromInventory(to_string(InventoryID), itemQty);
+        if (Itory.getInventory(InventoryID)->getQuantity() > itemQty)
+        {
+          Itory.deleteFromInventory(to_string(InventoryID), itemQty);
+        }
+        else
+        {
+          cout << "Error!" << endl;
+        }
       }
     }
     else if (command == "MOVE")
     {
 
-      // string slotSrc;
-      // int slotQty;
-      // string slotDest;
-      // need to handle multiple destinations
-      // cin >> slotSrc >> slotQty >> slotDest;
-      // cout << "TODO" << endl;
-      string s;
-      getline(cin, s);
-
-      string ret = "";
-
-      vector<string> v;
-
-      for (int i = 0; i < v.size(); i++)
+      string slotSrc;
+      int slotQty;
+      string slotDest;
+      list<string> Dest;
+      cin >> slotSrc >> slotQty;
+      if (slotSrc.front() == 'I')
       {
-        if (s[i] == ' ')
+        if (slotQty == 1)
         {
-          v.push_back(ret);
-          ret = "";
+          cin >> slotDest;
+          if (slotDest.front() == 'I')
+          {
+            Itory.combineTwoItem(slotSrc, slotDest);
+          }
+          else
+          {
+            int x = slotSrc.back() - '0';
+            int y = slotDest.back() - '0';
+            Craft.addToCrafting(Itory.getInventory(x), y);
+            Itory.deleteFromInventory(to_string(x), 1);
+          }
         }
         else
         {
-          ret += s[i];
+          int x = slotSrc.back() - '0';
+          if (Itory.getInventory(x)->getQuantity() >= slotQty)
+          {
+            for (int i = 0; i < slotQty; i++)
+            {
+              cin >> slotDest;
+              Dest.push_back(slotDest);
+            }
+            Dest.push_back("0");
+            for (int j = 0; j < slotQty; j++)
+            {
+              int y = (Dest.front()).back() - '0';
+              Craft.addToCrafting(Itory.getInventory(x), y);
+              Dest.pop_front();
+            }
+            Itory.deleteFromInventory(to_string(x), slotQty);
+          }
+          else
+          {
+            cout << "Tidak cukup!" << endl;
+          }
         }
       }
-      v.push_back(ret);
-      for (string sx : v)
+      else
       {
-        cout << sx << endl;
+        cin >> slotDest;
+        if (slotDest.front() == 'I')
+        {
+          int x = slotDest.back() - '0';
+          Itory.addToInventory(Craft.getCrafting(x));
+          Craft.deleteCrafting(x);
+        }
+        else
+        {
+          cout << "Input MOVE Salah!" << endl;
+        }
       }
     }
     else if (command == "USE")
     {
       int ToolID;
       cin >> ToolID;
-      // cari item dari id tertentu
       for (int i = 0; i < 27; i++)
       {
-        if (Itory.getInventory(i)->isTool())
+        if (Itory.getInventory(i) != NULL && Itory.getInventory(i)->isTool() && Itory.getInventory(i)->getID() == ToolID)
         {
-          if (Itory.getInventory(i)->getID() == ToolID)
-          {
-            Itory.getInventory(i)->modifyQuantity(-1);
-          }
+          Itory.getInventory(i)->modifyQuantity(-1);
+        }
+        else
+        {
+          i += 30;
         }
       }
     }
