@@ -32,11 +32,17 @@ void readConfig(map<pair<string, int>, string> &recipe)
             int n = line.size();
             if (iter != numLine)
             {
+                int cnt=0;
                 for (int i = 0; i < n; i++)
                 {
-                    if (line[i] == ' ')
+                    if (line[i] == ' '){
+                        cnt++;
                         continue;
+                    }
                     ret += line[i];
+                }
+                for(;cnt<2;cnt++){
+                    ret+="-";
                 }
             }
             else
