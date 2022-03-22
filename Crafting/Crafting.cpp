@@ -80,14 +80,11 @@ string Crafting::getStringCrafting(){
         if (isCraftingEmpty(i)){
             crafting += "-";
         } else {
-            cout << getCrafting(i)->getName() << endl;
-            /*if(getCrafting(i)->getType() != "-"){
+            if(getCrafting(i)->getType() != "-"){
                 crafting += getCrafting(i)->getName();                
             } else {
                 crafting += getCrafting(i)->getType();                
             }
-            */
-           crafting += getCrafting(i)->getName();
         }
     }
     return crafting;
@@ -96,7 +93,6 @@ string Crafting::getStringCrafting(){
 // helper function
 bool Crafting::Craftable (string X){
     string crafting = getStringCrafting();
-    cout << "string normal adalah" << crafting << endl;
     size_t found = crafting.find(X);
     if (found != string::npos){
         return true;
@@ -109,7 +105,6 @@ bool Crafting::Craftable (string X){
 bool Crafting::CraftableSymmetry (string X){
     symmetry();
     string crafting = getStringCrafting();
-    cout << "string symmetry adalah" << crafting << endl;
     symmetry();
 
     size_t found = crafting.find(X);
@@ -128,7 +123,6 @@ bool Crafting::isCraftable(string X){
     if (Craftable(X) || CraftableSymmetry(X)){
         craftable = true;
     }
-
     return craftable;
 }
 

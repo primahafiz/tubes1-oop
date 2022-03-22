@@ -56,7 +56,8 @@ void Inventory::addToInventory(Item *a)
                     break;
                 int toAdd = min(cur, 64 - inventory[i].getSlotItem()->getQuantity());
                 cur -= toAdd;
-                inventory[i] = new nonTool(a->getID(), a->getName(), a->getType(), toAdd + inventory[i].getSlotItem()->getQuantity());
+                inventory[i].addSlot(new nonTool(a->getID(), a->getName(), a->getType(), toAdd + inventory[i].getSlotItem()->getQuantity()));
+                cout<<inventory[i].getSlotItem()->getQuantity()<<endl;
             }
         }
         for (int i = 0; i < 27; i++)
