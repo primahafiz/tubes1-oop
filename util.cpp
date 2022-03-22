@@ -87,32 +87,32 @@ Item *getItemFromString(string s, int num)
     else if (s == "OAK_LOG")
     {
         Oak OAK;
-        return new Log(OAK, num);
+        return new Log<Oak>(OAK, num);
     }
     else if (s == "SPRUCE_LOG")
     {
         Spruce SPRUCE;
-        return new Log(SPRUCE, num);
+        return new Log<Spruce>(SPRUCE, num);
     }
     else if (s == "BIRCH_LOG")
     {
         Birch BIRCH;
-        return new Log(BIRCH, num);
+        return new Log<Birch>(BIRCH, num);
     }
     else if (s == "OAK_PLANK")
     {
         Oak OAK;
-        return new Plank(OAK, num);
+        return new Plank<Oak>(OAK, num);
     }
     else if (s == "SPRUCE_PLANK")
     {
         Spruce SPRUCE;
-        return new Plank(SPRUCE, num);
+        return new Plank<Spruce>(SPRUCE, num);
     }
     else if (s == "BIRCH_PLANK")
     {
         Birch BIRCH;
-        return new Plank(BIRCH, num);
+        return new Plank<Birch>(BIRCH, num);
     }
     else if (s == "STICK")
     {
@@ -121,72 +121,72 @@ Item *getItemFromString(string s, int num)
     else if (s == "COBBLESTONE")
     {
         Cobblestone COBBLESTONE;
-        return new Stone(COBBLESTONE, num);
+        return new Stone<Cobblestone>(COBBLESTONE, num);
     }
     else if (s == "BLACKSTONE")
     {
         Blackstone BLACKSTONE;
-        return new Stone(BLACKSTONE, num);
+        return new Stone<Blackstone>(BLACKSTONE, num);
     }
     else if (s == "WOODEN_AXE")
     {
         WoodenType WOODEN;
-        return new Axe(WOODEN);
+        return new Axe<WoodenType>(WOODEN);
     }
     else if (s == "STONE_AXE")
     {
         StoneType STONE;
-        return new Axe(STONE);
+        return new Axe<StoneType>(STONE);
     }
     else if (s == "IRON_AXE")
     {
         IronType IRON;
-        return new Axe(IRON);
+        return new Axe<IronType>(IRON);
     }
     else if (s == "DIAMOND_AXE")
     {
         DiamondType DIAMOND;
-        return new Axe(DIAMOND);
+        return new Axe<DiamondType>(DIAMOND);
     }
     else if (s == "WOODEN_SWORD")
     {
         WoodenType WOODEN;
-        return new Sword(WOODEN);
+        return new Sword<WoodenType>(WOODEN);
     }
     else if (s == "STONE_SWORD")
     {
         StoneType STONE;
-        return new Sword(STONE);
+        return new Sword<StoneType>(STONE);
     }
     else if (s == "IRON_SWORD")
     {
         IronType IRON;
-        return new Sword(IRON);
+        return new Sword<IronType>(IRON);
     }
     else if (s == "DIAMOND_SWORD")
     {
         DiamondType DIAMOND;
-        return new Sword(DIAMOND);
+        return new Sword<DiamondType>(DIAMOND);
     }
     else if (s == "WOODEN_PICKAXE")
     {
         WoodenType WOODEN;
-        return new Pickaxe(WOODEN);
+        return new Pickaxe<WoodenType>(WOODEN);
     }
     else if (s == "STONE_PICKAXE")
     {
         StoneType STONE;
-        return new Pickaxe(STONE);
+        return new Pickaxe<StoneType>(STONE);
     }
     else if (s == "IRON_PICKAXE")
     {
         IronType IRON;
-        return new Pickaxe(IRON);
+        return new Pickaxe<IronType>(IRON);
     }
     else if (s == "DIAMOND_PICKAXE")
     {
         DiamondType DIAMOND;
-        return new Pickaxe(DIAMOND);
+        return new Pickaxe<DiamondType>(DIAMOND);
     }
     return 0;
 }
