@@ -5,112 +5,140 @@
 #include <string>
 using namespace std;
 
-class WoodenType {
-    private:
-        string name;
-        int id;
-    public:
-        Wooden() {
-            setName("WOODEN");
-            setId(0);
-        }
+class WoodenType
+{
+private:
+    string name;
+    int id;
 
-        void setName(string name) {
-            this->name = name;
-        }
+public:
+    WoodenType()
+    {
+        setName("WOODEN");
+        setId(0);
+    }
 
-        string getName() const {
-            return this->name;
-        }
+    void setName(string name)
+    {
+        this->name = name;
+    }
 
-        void setId(int id) {
-            this->id = id;
-        }
+    string getName() const
+    {
+        return this->name;
+    }
 
-        int getId() const {
-            return this->id;
-        }
+    void setId(int id)
+    {
+        this->id = id;
+    }
+
+    int getId() const
+    {
+        return this->id;
+    }
 };
 
-class StoneType {
-    private:
-        string name;
-        int id;
-    public:
-        Stone() {
-            setName("STONE");
-            setId(1);
-        }
+class StoneType
+{
+private:
+    string name;
+    int id;
 
-        void setName(string name) {
-            this->name = name;
-        }
+public:
+    StoneType()
+    {
+        setName("STONE");
+        setId(1);
+    }
 
-        string getName() const {
-            return this->name;
-        }
+    void setName(string name)
+    {
+        this->name = name;
+    }
 
-        void setId(int id) {
-            this->id = id;
-        }
+    string getName() const
+    {
+        return this->name;
+    }
 
-        int getId() const {
-            return this->id;
-        }
+    void setId(int id)
+    {
+        this->id = id;
+    }
+
+    int getId() const
+    {
+        return this->id;
+    }
 };
 
-class IronType {
-    private:
-        string name;
-        int id;
-    public:
-        Iron() {
-            setName("IRON");
-            setId(2);
-        }
+class IronType
+{
+private:
+    string name;
+    int id;
 
-        void setName(string name) {
-            this->name = name;
-        }
+public:
+    IronType()
+    {
+        setName("IRON");
+        setId(2);
+    }
 
-        string getName() const {
-            return this->name;
-        }
+    void setName(string name)
+    {
+        this->name = name;
+    }
 
-        void setId(int id) {
-            this->id = id;
-        }
+    string getName() const
+    {
+        return this->name;
+    }
 
-        int getId() const {
-            return this->id;
-        }
+    void setId(int id)
+    {
+        this->id = id;
+    }
+
+    int getId() const
+    {
+        return this->id;
+    }
 };
 
-class DiamondType {
-    private:
-        string name;
-        int id;
-    public:
-        Diamond() {
-            setName("DIAMOND");
-            setId(3);
-        }
+class DiamondType
+{
+private:
+    string name;
+    int id;
 
-        void setName(string name) {
-            this->name = name;
-        }
+public:
+    DiamondType()
+    {
+        setName("DIAMOND");
+        setId(3);
+    }
 
-        string getName() const {
-            return this->name;
-        }
+    void setName(string name)
+    {
+        this->name = name;
+    }
 
-        void setId(int id) {
-            this->id = id;
-        }
+    string getName() const
+    {
+        return this->name;
+    }
 
-        int getId() const {
-            return this->id;
-        }
+    void setId(int id)
+    {
+        this->id = id;
+    }
+
+    int getId() const
+    {
+        return this->id;
+    }
 };
 
 #endif

@@ -19,6 +19,7 @@
 #include "Item/Stone.hpp"
 #include "Item/Sword.hpp"
 #include "Item/Tool.hpp"
-// #include "Item/ToolType.hpp"
+#include "Item/ToolType.hpp"
+#include "main.hpp"
 
 #endif

@@ -1,113 +1,18 @@
 // sample main file, replace this with your own code
-#include <filesystem>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <map>
-#include "head.hpp"
-
-using namespace std;
-
-// ini nanti pindahin aja ke main.hpp
-void readConfig(map<pair<string, int>, string> &recipe)
-{
-  string configPath = "./config";
-  for (const auto &entry : filesystem::directory_iterator(configPath + "/recipe"))
-  {
-
-    ifstream checkLine(entry.path());
-
-    int numLine = 0;
-    for (string line; getline(checkLine, line);)
-    {
-      numLine++;
-    }
-
-    ifstream recipeConfigFile(entry.path());
-
-    string ret = "";
-    string infoItem = "";
-    int num = 0;
-
-    int iter = 0;
-
-    for (string line; getline(recipeConfigFile, line);)
-    {
-      iter++;
-
-      if (iter == 1)
-        continue;
-
-      int n = line.size();
-      if (iter != numLine)
-      {
-        for (int i = 0; i < n; i++)
-        {
-          if (line[i] == ' ')
-            continue;
-          ret += line[i];
-        }
-      }
-      else
-      {
-        for (int i = 0; i < n; i++)
-        {
-          if (line[i] == ' ')
-            break;
-          infoItem += line[i];
-        }
-        int mul = 1;
-        for (int i = n - 1; i >= 0; i--)
-        {
-          if (line[i] == ' ')
-            break;
-          num += (line[i] - '0') * mul;
-          mul *= 10;
-        }
-      }
-    }
-    int nRes = ret.size();
-    for (int i = nRes - 1; i >= 0; i--)
-    {
-      if (ret[i] != '-')
-      {
-        ret = ret.substr(0, i + 1);
-        break;
-      }
-    }
-    recipe[{infoItem, num}] = ret;
-  }
-}
-
-Item* getItemFromString(string s,int num){
-  if(s=="DIAMOND"){
-    return new Diamond(num);
-    
-  }
-}
-
+#include "main.hpp"
 
 int main()
 {
-  map<pair<string, int>, string> recipe;
-  readConfig(recipe);
+  // map<pair<string, int>, string> recipe;
+  // readConfig(recipe);
 
-  map<string,Item> getItem;
-  getItem["IRON_INGOT"]=new IronIngot();
-  getItem["DIAMOND"]=new Diamond();
-
-  string s="IRON_INGOT";
-
-  Item *res=new getItem[s];
-  res->modifyQuantity(num);
-
-
+  // map<string, Item> getItem;
   // Crafting craft=new Crafting();
   // for(auto x:recipe){
   //   cout<<(x.first).first<<" "<<(x.first).second<<endl;
   //   cout<<x.second<<endl;
-    Crafting craft3 = craft;
-    craft3=craft2;
+  // Crafting craft3 = craft;
+  // craft3 = craft2;
   //   craft3.symmetry();
   //   Item *res;
   //   if (craft.isCraftable(x.second))
@@ -120,240 +25,142 @@ int main()
   //     string item = craft3.getCraft(x.first,x.second);
   //   }
   //     break;
-    
+
   //   cout<<endl;
   // }
-  if craft.isCraftableTool():
-    // delete isinya di craft
-    craft.getcraftedtool();
-  // Inventory Itory = Inventory();
-  // Crafting Craft = Crafting();
-  // string configPath = "./config";
-  // string itemConfigPath = configPath + "/item.txt";
+  // if craft
+  //   .isCraftableTool() : // delete isinya di craft
+  //                        craft.getcraftedtool();
+  Inventory Itory = Inventory();
+  Crafting Craft = Crafting();
+  string configPath = "./config";
+  string itemConfigPath = configPath + "/item.txt";
 
-  // // read item from config file
-  // ifstream itemConfigFile(itemConfigPath);
+  // read item from config file
+  ifstream itemConfigFile(itemConfigPath);
 
-  // for (string line; getline(itemConfigFile, line);)
-  // {
-  //   // cout << line << endl;
-  //   // do something
-  // }
+  for (string line; getline(itemConfigFile, line);)
+  {
+    // cout << line << endl;
+    // do something
+  }
 
   // // read recipes
-  // for (const auto &entry :
-  //      filesystem::directory_iterator(configPath + "/recipe"))
-  // {
-  //   // cout << entry.path() << endl;
-  //   // read from file and do something
-  // }
+  for (const auto &entry :
+       filesystem::directory_iterator(configPath + "/recipe"))
+  {
+    // cout << entry.path() << endl;
+    // read from file and do something
+  }
 
   // // sample interaction
-  // string command;
-  // while (cin >> command)
-  // {
-  //   if (command == "SHOW")
-  //   {
-  //     Craft.printCrafting();
-  //     Itory.printInventory();
-  //   }
-  //   else if (command == "GIVE")
-  //   {
-  //     string itemName;
-  //     int itemQty;
-  //     // Dibandingkan berdasarkan nama benda
-  //     cin >> itemName;
-  //     // if (itemName == "WOODEN_AXE")
-  //     // {
-  //     //   Wooden WOODEN;
-  //     //   Item *temp = new Axe(WOODEN);
-  //     //   Itory.addToInventory(temp);
-  //     // }
-  //     if (itemName == "DIAMOND")
-  //     {
-  //       cin >> itemQty;
-  //       Item *temp = new Diamond(itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "IRON_INGOT")
-  //     {
-  //       cin >> itemQty;
-  //       Item *temp = new IronIngot(itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "IRON_NUGGET")
-  //     {
-  //       cin >> itemQty;
-  //       Item *temp = new IronNugget(itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "IRON_NUGGET")
-  //     {
-  //       cin >> itemQty;
-  //       Item *temp = new IronNugget(itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "OAK_LOG")
-  //     {
-  //       cin >> itemQty;
-  //       Oak OAK;
-  //       Item *temp = new Log(OAK, itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "SPRUCE_LOG")
-  //     {
-  //       cin >> itemQty;
-  //       Spruce SPRUCE;
-  //       Item *temp = new Log(SPRUCE, itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "BIRCH_LOG")
-  //     {
-  //       cin >> itemQty;
-  //       Birch BIRCH;
-  //       Item *temp = new Log(BIRCH, itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "OAK_PLANK")
-  //     {
-  //       cin >> itemQty;
-  //       Oak OAK;
-  //       Item *temp = new Plank(OAK, itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "SPRUCE_PLANK")
-  //     {
-  //       cin >> itemQty;
-  //       Spruce SPRUCE;
-  //       Item *temp = new Plank(SPRUCE, itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "BIRCH_PLANK")
-  //     {
-  //       cin >> itemQty;
-  //       Birch BIRCH;
-  //       Item *temp = new Plank(BIRCH, itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "STICK")
-  //     {
-  //       cin >> itemQty;
-  //       Item *temp = new Stick(itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "COBBLESTONE")
-  //     {
-  //       cin >> itemQty;
-  //       Cobblestone COBBLESTONE;
-  //       Item *temp = new Stone(COBBLESTONE, itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else if (itemName == "BLACKSTONE")
-  //     {
-  //       cin >> itemQty;
-  //       Blackstone BLACKSTONE;
-  //       Item *temp = new Stone(BLACKSTONE, itemQty);
-  //       Itory.addToInventory(temp);
-  //     }
-  //     else
-  //     {
-  //       cout << "Tidak ada item tersebut!" << endl;
-  //     }
-  //   }
-  //   else if (command == "DISCARD")
-  //   {
-  //     int itemID;
-  //     int itemQty;
-  //     bool found = true;
-  //     int i = 0;
-  //     cin >> itemID >> itemQty;
-  //     while (found && i < 27)
-  //     {
-  //       if (Itory.getInventory(i)->getID() == itemID)
-  //       {
-  //         if (Itory.getInventory(i)->isTool())
-  //         {
-  //         }
-  //         else
-  //         {
-  //           if (Itory.getInventory(i)->getQuantity() > itemQty)
-  //           {
-  //             Itory.getInventory(i)->modifyQuantity(-itemQty);
-  //             found = false;
-  //           }
-  //           else
-  //           {
-  //           }
-  //         }
-  //       }
-  //       else
-  //       {
-  //         i++;
-  //       }
+  string command;
+  while (cin >> command)
+  {
+    if (command == "SHOW")
+    {
+      Craft.printCrafting();
+      Itory.printInventory();
+    }
+    else if (command == "GIVE")
+    {
+      string itemName;
+      int itemQty;
+      cin >> itemName >> itemQty;
+      Itory.addToInventory(getItemFromString(itemName, itemQty));
+    }
+    else if (command == "DISCARD")
+    {
+      int InventoryID;
+      int itemQty;
+      cin >> InventoryID >> itemQty;
+      if (Itory.getInventory(InventoryID)->isTool())
+      {
+        Itory.deleteFromInventory(to_string(InventoryID), 1);
+      }
+      else
+      {
+        Itory.deleteFromInventory(to_string(InventoryID), itemQty);
+      }
+    }
+    else if (command == "MOVE")
+    {
 
-  //       // if (itemID == "")
-  //       //   // Dibandingkan berdasarkan ID
+      // string slotSrc;
+      // int slotQty;
+      // string slotDest;
+      // need to handle multiple destinations
+      // cin >> slotSrc >> slotQty >> slotDest;
+      // cout << "TODO" << endl;
+      string s;
+      getline(cin, s);
 
-  //       //   Item *temp =
-  //       //       temp.modifyQuantity(-itemQty);
-  //     }
-  //   }
-  //   // else if (command == "MOVE")
-  //   // {
-  //   //   string slotSrc;
-  //   //   int slotQty;
-  //   //   string slotDest;
-  //   //   cin
-  //   //           // need to handle multiple destinations
-  //   //           cin >>
-  //   //       slotSrc >> slotQty >> slotDest;
-  //   //   cout << "TODO" << endl;
-  //   // }
-  //   else if (command == "USE")
-  //   {
-  //     int ToolID;
-  //     cin >> ToolID;
-  //     // cari item dari id tertentu
-  //     for (int i = 0; i < 27; i++)
-  //     {
-  //       if (Itory.getInventory(i)->isTool())
-  //       {
-  //         if (Itory.getInventory(i)->getID() == ToolID)
-  //         {
-  //           Itory.getInventory(i)->modifyQuantity(-1);
-  //         }
-  //       }
-  //     }
-  //   }
-  //   // else if (command == "CRAFT")
-  //   // {
-  //   //   cout << "TODO" << endl;
-  //   // }
-  //   // else if (command == "EXPORT")
-  //   // {
-  //   //   string outputPath;
-  //   //   cin >> outputPath;
-  //   //   ofstream outputFile(outputPath);
+      string ret = "";
 
-  //   //   // hardcode for first test case
-  //   //   outputFile << "21:10" << endl;
-  //   //   outputFile << "6:1" << endl;
-  //   //   for (int i = 2; i < 27; i++)
-  //   //   {
-  //   //     outputFile << "0:0" << endl;
-  //   //   }
+      vector<string> v;
 
-  //   //   cout << "Exported" << endl;
-  //   // }
-  //   else if (command == "EXIT")
-  //   {
-  //     break;
-  //   }
-  //   else
-  //   {
-  //     // todo
-  //     cout << "Invalid command" << endl;
-  //   }
-  // }
-  // return 0;
+      for (int i = 0; i < v.size(); i++)
+      {
+        if (s[i] == ' ')
+        {
+          v.push_back(ret);
+          ret = "";
+        }
+        else
+        {
+          ret += s[i];
+        }
+      }
+      v.push_back(ret);
+      for (string sx : v)
+      {
+        cout << sx << endl;
+      }
+    }
+    else if (command == "USE")
+    {
+      int ToolID;
+      cin >> ToolID;
+      // cari item dari id tertentu
+      for (int i = 0; i < 27; i++)
+      {
+        if (Itory.getInventory(i)->isTool())
+        {
+          if (Itory.getInventory(i)->getID() == ToolID)
+          {
+            Itory.getInventory(i)->modifyQuantity(-1);
+          }
+        }
+      }
+    }
+    // else if (command == "CRAFT")
+    // {
+    //   cout << "TODO" << endl;
+    // }
+    // else if (command == "EXPORT")
+    // {
+    //   string outputPath;
+    //   cin >> outputPath;
+    //   ofstream outputFile(outputPath);
+
+    //   // hardcode for first test case
+    //   outputFile << "21:10" << endl;
+    //   outputFile << "6:1" << endl;
+    //   for (int i = 2; i < 27; i++)
+    //   {
+    //     outputFile << "0:0" << endl;
+    //   }
+
+    //   cout << "Exported" << endl;
+    // }
+    else if (command == "EXIT")
+    {
+      break;
+    }
+    else
+    {
+      cout << "Invalid command" << endl;
+    }
+  }
+  return 0;
 }
