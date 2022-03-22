@@ -232,11 +232,7 @@ void Inventory::printInventory()
 {
     for (int i = 0; i < 27; i++)
     {
-        inventory[i].printSlot();
-        if ((i + 1) % 9 == 0)
-        {
-            cout << endl;
-        }
+        inventory[i].printSlot(i%9==8);
     }
 }
 int Inventory::parsingID(string ID)

@@ -19,7 +19,7 @@ public:
     }
 
     // User-Defined Constructor
-    Sword(T swordType) : Tool(17+swordType.getId(), swordType.getName()+"_SWORD", "-", 10) {
+    Sword(T swordType) : Tool(21+swordType.getId(), swordType.getName()+"_SWORD", "-", 10) {
         setSwordType(swordType);
     }
 

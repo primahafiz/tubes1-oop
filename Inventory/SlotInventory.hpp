@@ -2,6 +2,7 @@
 #define SLOT_INVENTORY_H
 
 #include <iostream>
+#include <iomanip>
 #include "../Item/Item.hpp"
 #include "../Exception/DeleteInventoryException.hpp"
 
@@ -41,7 +42,10 @@ class SlotInventory{
         void addQuantity(int num);
 
         // tampilkan slot
-        void printSlot();
+        void printSlot(bool isNewLine);
+
+        // print newline
+        void printSpace(int num);
 };
 
 

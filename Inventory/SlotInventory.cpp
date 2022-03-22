@@ -51,11 +51,35 @@ void SlotInventory::addQuantity(int num){
     this->slotItem->setQuantity(this->slotItem->getQuantity()+num);
 }
 
-void SlotInventory::printSlot(){
+void SlotInventory::printSlot(bool isNewLine){
     if(this->slotItem==NULL){
         cout<<"[E]";
+        if(isNewLine){
+            cout<<endl;
+        }else{
+            printSpace(7);
+        }
     }else{
-        cout<<"["<<this->slotItem->getID()<<"]";
+        cout<<"["<<this->slotItem->getID()<<"(";
+        if(this->slotItem->isTool()){
+            cout<<this->slotItem->getDurability();
+        }else{
+            cout<<this->slotItem->getQuantity();
+        }
+        cout<<")]";
+        if(isNewLine){
+            cout<<endl;
+        }else if(this->slotItem->isTool()){
+            printSpace(4-(this->slotItem->getID()<10?0:1)-(this->slotItem->getDurability()<10?0:1));
+        }else{
+            printSpace(4-(this->slotItem->getID()<10?0:1)-(this->slotItem->getQuantity()<10?0:1));
+        }
+    }
+}
+
+void SlotInventory::printSpace(int num){
+    for(int i=0;i<num;i++){
+        cout<<" ";
     }
 }
 
