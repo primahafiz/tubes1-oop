@@ -8,6 +8,12 @@ int main()
   Inventory Itory = Inventory();
   Crafting Craft = Crafting();
 
+  for (auto x : recipe){
+    if (x.second == "DIAMONDDIAMOND-DIAMONDSTICK--STICK"){
+      cout << "ketemu" << endl;
+    }
+  }
+
   // sample interaction
   string command;
   while (cin >> command)
@@ -151,6 +157,7 @@ int main()
       {
         for (auto x : recipe)
         {
+          cout << "resep saat ini" << x.second << endl;
           if (Craft.isCraftable(x.second))
           {
             Item *item = getItemFromString((x.first).first, (x.first).second);

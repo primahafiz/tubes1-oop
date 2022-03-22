@@ -15,7 +15,7 @@ public:
     }
 
     // User-Defined Constructor
-    Stick(int quantity) : nonTool(4, "STICK", "-", quantity) {
+    Stick(int quantity) : nonTool(7, "STICK", "-", quantity) {
     }
 
     // Setter
