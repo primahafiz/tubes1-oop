@@ -78,6 +78,35 @@ void Inventory::addToInventory(Item *a)
     }
 }
 
+void Inventory::addToInventory(string ID,Item *a){
+    int slotId=this->parsingID(ID);
+    if(inventory[slotId].isSlotEmpty()){
+        if(a->isTool()){
+            inventory[slotId].addSlot(a);
+        }else{
+            if(a->getQuantity()>64){
+                throw InventoryFullException();
+            }else{
+                inventory[slotId].addSlot(a);
+            }
+        }
+    }else{
+        if(a->isTool()){
+            throw InventoryFullException();
+        }else{
+            if(a->getName()==inventory[slotId].getSlotItem()->getName()){
+                if(a->getQuantity()+inventory[slotId].getSlotItem()->getQuantity()>64){
+                    throw InventoryFullException();
+                }else{
+                    inventory[slotId].getSlotItem()->modifyQuantity(a->getQuantity());
+                }
+            }else{
+                throw CombineDifferentItemException();
+            }
+        }
+    }
+}
+
 int Inventory::getAvailableSlot(Item *a)
 {
     int res = 0;
