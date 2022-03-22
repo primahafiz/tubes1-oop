@@ -201,4 +201,17 @@ Item *getItemFromString(string s, int num)
     }
     return 0;
 }
+
+int StringToInt(string ID)
+{
+    int ans = 0;
+    int mul = 1;
+    int n = ID.size();
+    for (int i = n - 1; i > 0; i--)
+    {
+        ans += (ID[i] - '0') * mul;
+        mul *= 10;
+    }
+    return ans;
+}
 #endif

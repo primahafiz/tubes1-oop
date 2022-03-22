@@ -33,7 +33,6 @@ void Inventory::addToInventory(Item *a)
             {
                 if (inventory[i].isSlotEmpty())
                 {
-                    cout << i << endl;
                     inventory[i].addSlot(a);
                     break;
                 }
@@ -78,29 +77,48 @@ void Inventory::addToInventory(Item *a)
     }
 }
 
-void Inventory::addToInventory(string ID,Item *a){
-    int slotId=this->parsingID(ID);
-    if(inventory[slotId].isSlotEmpty()){
-        if(a->isTool()){
+void Inventory::addToInventory(string ID, Item *a)
+{
+    int slotId = this->parsingID(ID);
+    if (inventory[slotId].isSlotEmpty())
+    {
+        if (a->isTool())
+        {
             inventory[slotId].addSlot(a);
-        }else{
-            if(a->getQuantity()>64){
+        }
+        else
+        {
+            if (a->getQuantity() > 64)
+            {
                 throw InventoryFullException();
-            }else{
+            }
+            else
+            {
                 inventory[slotId].addSlot(a);
             }
         }
-    }else{
-        if(a->isTool()){
+    }
+    else
+    {
+        if (a->isTool())
+        {
             throw InventoryFullException();
-        }else{
-            if(a->getName()==inventory[slotId].getSlotItem()->getName()){
-                if(a->getQuantity()+inventory[slotId].getSlotItem()->getQuantity()>64){
+        }
+        else
+        {
+            if (a->getName() == inventory[slotId].getSlotItem()->getName())
+            {
+                if (a->getQuantity() + inventory[slotId].getSlotItem()->getQuantity() > 64)
+                {
                     throw InventoryFullException();
-                }else{
+                }
+                else
+                {
                     inventory[slotId].getSlotItem()->modifyQuantity(a->getQuantity());
                 }
-            }else{
+            }
+            else
+            {
                 throw CombineDifferentItemException();
             }
         }
@@ -232,7 +250,7 @@ void Inventory::printInventory()
 {
     for (int i = 0; i < 27; i++)
     {
-        inventory[i].printSlot(i%9==8);
+        inventory[i].printSlot(i % 9 == 8);
     }
 }
 int Inventory::parsingID(string ID)

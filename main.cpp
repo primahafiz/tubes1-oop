@@ -7,26 +7,30 @@ int main()
   readConfig(recipe);
 
   // map<string, Item> getItem;
-  // Crafting craft=new Crafting();
-  // for(auto x:recipe){
-  //   cout<<(x.first).first<<" "<<(x.first).second<<endl;
-  //   cout<<x.second<<endl;
-  // Crafting craft3 = craft;
-  // craft3 = craft2;
+  // Crafting craft = new Crafting();
+  // for (auto x : recipe)
+  // {
+  //   cout << (x.first).first << " " << (x.first).second << endl;
+  //   cout << x.second << endl;
+  //   Crafting craft3 = craft;
+  //   craft3 = craft2;
   //   craft3.symmetry();
   //   Item *res;
   //   if (craft.isCraftable(x.second))
   //     string item = x.first.first;
-  //     int num=x.first.second;
-  //     if(item=="DIAMOND"){
-  //       res=new Diamond(num);
-  //     }else if()
-  //   else if(craft3.isCraftable(x.second)){
-  //     string item = craft3.getCraft(x.first,x.second);
+  //   int num = x.first.second;
+  //   if (item == "DIAMOND")
+  //   {
+  //     res = new Diamond(num);
   //   }
-  //     break;
+  //   else if ()
+  //     else if (craft3.isCraftable(x.second))
+  //     {
+  //       string item = craft3.getCraft(x.first, x.second);
+  //     }
+  //   break;
 
-  //   cout<<endl;
+  //   cout << endl;
   // }
   // if craft
   //   .isCraftableTool() : // delete isinya di craft
@@ -109,16 +113,13 @@ int main()
           }
           else
           {
-            int x = slotSrc.back() - '0';
-            int y = slotDest.back() - '0';
-            Craft.addToCrafting(Itory.getInventory(x), y);
-            Itory.deleteFromInventory(to_string(x), 1);
+            Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(slotDest));
+            Itory.deleteFromInventory(slotSrc, 1);
           }
         }
         else
         {
-          int x = slotSrc.back() - '0';
-          if (Itory.getInventory(x)->getQuantity() >= slotQty)
+          if (Itory.getInventory(StringToInt(slotSrc))->getQuantity() >= slotQty)
           {
             for (int i = 0; i < slotQty; i++)
             {
@@ -128,11 +129,10 @@ int main()
             Dest.push_back("0");
             for (int j = 0; j < slotQty; j++)
             {
-              int y = (Dest.front()).back() - '0';
-              Craft.addToCrafting(Itory.getInventory(x), y);
+              Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(Dest.front()));
               Dest.pop_front();
             }
-            Itory.deleteFromInventory(to_string(x), slotQty);
+            Itory.deleteFromInventory(to_string(StringToInt(slotSrc)), slotQty);
           }
           else
           {
@@ -158,23 +158,55 @@ int main()
     }
     else if (command == "USE")
     {
-      int ToolID;
-      cin >> ToolID;
-      for (int i = 0; i < 27; i++)
+      string InventoryID;
+      cin >> InventoryID;
+      if (Itory.getInventory(StringToInt(InventoryID)) != NULL)
       {
-        if (Itory.getInventory(i) != NULL && Itory.getInventory(i)->isTool() && Itory.getInventory(i)->getID() == ToolID)
+        if (Itory.getInventory(StringToInt(InventoryID))->isTool())
         {
-          Itory.getInventory(i)->modifyQuantity(-1);
+          if (Itory.getInventory(StringToInt(InventoryID))->getDurability() > 1)
+          {
+            Itory.getInventory(StringToInt(InventoryID))->modifyDurability(-1);
+          }
+          else
+          {
+            Itory.deleteFromInventory(InventoryID, 1);
+          }
         }
         else
         {
-          i += 30;
+          cout << "Inventory slot bukan berisi Tool!" << endl;
         }
+      }
+      else
+      {
+        cout << "Tidak ada Item!" << endl;
       }
     }
     else if (command == "CRAFT")
     {
-      cout << "TODO" << endl;
+      if (Craft.isToolCraftable())
+      {
+        Item *x = Craft.getToolCraftable();
+        Itory.addToInventory(x);
+      }
+      else
+      {
+        for (auto x : recipe)
+        {
+          if (Craft.isCraftable(x.second))
+          {
+            Item *item = getItemFromString((x.first).first, (x.first).second);
+            Itory.addToInventory(item);
+            Craft.clearCrafting();
+            break;
+          }
+        }
+      }
+      // Dicek jika bisa craft tool tanpa recipe
+      // jika tidak, cek resep
+      //  looping respnya (per satu file)
+      //  Dalam looping, dicek bisa atau ga
     }
     else if (command == "EXPORT")
     {
