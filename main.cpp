@@ -9,6 +9,7 @@ int main()
   Crafting Craft = Crafting();
 
   for (auto x : recipe){
+    cout<<"resep saat ini"<<x.second<<"\n";
     if (x.second == "DIAMONDDIAMOND-DIAMONDSTICK--STICK"){
       cout << "ketemu" << endl;
     }
