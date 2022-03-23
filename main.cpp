@@ -4,7 +4,8 @@
 int main()
 {
   map<pair<string, int>, string> recipe;
-  readConfig(recipe);
+  map<string, tuple<int, string, string>> itemConfig;
+  readConfig(recipe, itemConfig);
   Inventory Itory = Inventory();
   Crafting Craft = Crafting();
 
@@ -13,6 +14,10 @@ int main()
     if (x.second == "DIAMONDDIAMOND-DIAMONDSTICK--STICK"){
       cout << "ketemu" << endl;
     }
+  }
+
+  for (auto x : itemConfig){
+    cout << x.first << get<0>(x.second) << get<1>(x.second) << get<2>(x.second) << endl;
   }
 
   // sample interaction
@@ -33,18 +38,18 @@ int main()
     }
     else if (command == "DISCARD")
     {
-      int InventoryID;
+      string InventoryID;
       int itemQty;
       cin >> InventoryID >> itemQty;
-      if (Itory.getInventory(InventoryID)->isTool())
+      if (Itory.getInventory(StringToInt(InventoryID))->isTool())
       {
-        Itory.deleteFromInventory(to_string(InventoryID), 1);
+        Itory.deleteFromInventory(InventoryID, 1);
       }
       else
       {
-        if (Itory.getInventory(InventoryID)->getQuantity() > itemQty)
+        if (Itory.getInventory(StringToInt(InventoryID))->getQuantity() >= itemQty)
         {
-          Itory.deleteFromInventory(to_string(InventoryID), itemQty);
+          Itory.deleteFromInventory(InventoryID, itemQty);
         }
         else
         {

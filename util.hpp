@@ -8,6 +8,7 @@
 #include <iostream>
 #include <map>
 #include <list>
+#include <tuple>
 #include "Item/Axe.hpp"
 #include "Item/Diamond.hpp"
 #include "Item/IronIngot.hpp"
@@ -26,7 +27,7 @@
 
 using namespace std;
 
-void readConfig(map<pair<string, int>, string> &recipe);
+void readConfig(map<pair<string, int>, string> &recipe, map<string, tuple<int, string, string>> &itemConfig);
 
 Item *getItemFromString(string s, int num);
 

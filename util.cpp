@@ -1,6 +1,6 @@
 #include "util.hpp"
 
-void readConfig(map<pair<string, int>, string> &recipe)
+void readConfig(map<pair<string, int>, string> &recipe, map<string, tuple<int, string, string>> &itemConfig)
 {
     string configPath = "./config";
     for (const auto &entry : filesystem::directory_iterator(configPath + "/recipe"))
@@ -73,6 +73,24 @@ void readConfig(map<pair<string, int>, string> &recipe)
             }
         }
         recipe[{infoItem, num}] = ret;
+    }
+
+    // Read item.txt
+    ifstream itemConfigFile(configPath + "/item.txt");
+    for (string line; getline(itemConfigFile, line);) 
+    {
+        int start = 0;
+        int end = line.find(" ");
+        string data[4];
+        int i = 0;
+        while (end != -1) {
+            data[i] = line.substr(start, end - start);
+            start = end + 1;
+            end = line.find(" ", start);
+            i++;
+        }
+        data[i] = line.substr(start, end - start);
+        itemConfig[data[1]] = {stoi(data[0]), data[2], data[3]};
     }
 }
 
