@@ -203,7 +203,7 @@ void Inventory::combineTwoItem(string IDSrc, string IDDest)
     {
         throw CombineNullItemException();
     }
-    else if (!inventory[slotId1].getSlotItem()->isTool() && !inventory[slotId2].getSlotItem()->isTool() && inventory[slotId1].getSlotItem()->getName() == inventory[slotId1].getSlotItem()->getName())
+    else if (!inventory[slotId1].getSlotItem()->isTool() && !inventory[slotId2].getSlotItem()->isTool() && inventory[slotId1].getSlotItem()->getName() == inventory[slotId2].getSlotItem()->getName())
     {
         if (inventory[slotId1].getSlotItem()->getQuantity() + inventory[slotId2].getSlotItem()->getQuantity() > 64)
         {
