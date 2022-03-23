@@ -19,7 +19,7 @@ public:
     }
 
     // User-Defined Constructor
-    Stone(T stoneType, int quantity) : nonTool(get<0>(itemConfig.find(stoneType.getName()+"_STONE")->second), stoneType.getName()+"_STONE", get<1>(itemConfig.find(stoneType.getName()+"_STONE")->second), quantity)
+    Stone(T stoneType, int quantity) : nonTool(get<0>(itemConfig.find(stoneType.getName())->second), stoneType.getName(), get<1>(itemConfig.find(stoneType.getName())->second), quantity)
     {
         setStoneType(stoneType);
     }
