@@ -148,6 +148,7 @@ int main()
       }
       else
       {
+        /*
         for (auto x : recipe)
         {
           // cout << "resep saat ini" << x.second <<" "<<Craft.getStringCrafting()<< endl;
@@ -158,6 +159,47 @@ int main()
             Craft.clearCrafting();
             break;
           }
+        }
+        */
+        int countCraftable = 0;
+        for (auto x : recipe)
+        {
+          // cout << "resep saat ini" << x.second <<" "<<Craft.getStringCrafting()<< endl;
+          if (Craft.isCraftable(x.second))
+          {
+            countCraftable++;
+          }
+        }        
+
+        if (countCraftable == 0){
+          cout << "Not craftable" << endl;
+        } else if (countCraftable == 1){
+
+          for (auto x : recipe)
+          {
+            if (Craft.isCraftable(x.second))
+            {
+              Item *item = getItemFromString((x.first).first, (x.first).second);
+              Itory.addToInventory(item);
+              Craft.clearCrafting();
+              break;
+            }
+          }          
+
+        } else {
+
+          for (auto x : recipe)
+          {
+            // cout << "resep saat ini" << x.second <<" "<<Craft.getStringCrafting()<< endl;
+            if (Craft.isExactCraftable(x.second))
+            {
+              Item *item = getItemFromString((x.first).first, (x.first).second);
+              Itory.addToInventory(item);
+              Craft.clearCrafting();
+              break;
+            }
+          }   
+          
         }
       }
       // Dicek jika bisa craft tool tanpa recipe

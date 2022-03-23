@@ -88,26 +88,21 @@ string Crafting::getStringCrafting(){
         }
     }
 
-    crafting = cutString(crafting);
-    // cout << crafting << endl;
     return crafting;
 }
 
 // helper function
 bool Crafting::Craftable (string X){
     string crafting = getStringCrafting();
-    //size_t found = crafting.find(X);
-    /*if (found != string::npos){
-        return true;
-    } else {
-        return false;
-    }*/
-
-    if (X == crafting){
+    size_t found = crafting.find(X);
+    
+    if (found != string::npos){
         return true;
     } else {
         return false;
     }
+
+
 }
 
 // helper function
@@ -116,20 +111,14 @@ bool Crafting::CraftableSymmetry (string X){
     string crafting = getStringCrafting();
     symmetry();
 
-    /*
+   
     size_t found = crafting.find(X);
     if (found != string::npos){ 
         return true;
     } else {
         return false;
     }
-    */
-
-    if (X == crafting){
-        return true;
-    } else {
-        return false;
-    }
+   
 }
 
 // mengecek apakah craftable
@@ -141,6 +130,42 @@ bool Crafting::isCraftable(string X){
         craftable = true;
     }
     return craftable;
+}
+
+bool Crafting::ExactCraftable(string X){
+    string crafting = getStringCrafting();
+    crafting = cutString(crafting);
+
+    if (X == crafting){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// helper function 
+bool Crafting::ExactCraftableSymmetry (string X){
+    symmetry();
+    string crafting = getStringCrafting();
+    crafting = cutString(crafting);
+    symmetry();
+
+    if (X == crafting){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// mengecek apakah craftable
+bool Crafting::isExactCraftable(string X){
+    bool craftable = false;
+
+
+    if (ExactCraftable(X) || ExactCraftableSymmetry(X)){
+        craftable = true;
+    }
+    return craftable;    
 }
 
 // return total durability dari item yang ada di crafting

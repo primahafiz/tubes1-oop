@@ -42,6 +42,12 @@ public:
         // mengecek apakah craftable
         bool isCraftable(string X);
 
+        bool ExactCraftable(string X);
+        // helper function 
+        bool ExactCraftableSymmetry (string X);
+        // mengecek apakah craftable
+        bool isExactCraftable(string X);        
+
         // return total durability dari item yang ada di crafting
         int totalDurability();
         // mengecek apakah slot selain indeks a dan b kosong

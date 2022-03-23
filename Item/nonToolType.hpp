@@ -38,7 +38,7 @@ class Spruce {
         int id;
     public:
         Spruce() {
-            setName("Spruce");
+            setName("SPRUCE");
             setId(1);
         }
 
@@ -65,7 +65,7 @@ class Birch {
         int id;
     public:
         Birch() {
-            setName("Birch");
+            setName("BIRCH");
             setId(2);
         }
 
