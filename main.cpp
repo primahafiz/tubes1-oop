@@ -17,10 +17,6 @@ int main()
     }
   }
 
-  for (auto x : itemConfig){
-    cout << x.first << get<0>(x.second) << get<1>(x.second) << get<2>(x.second) << endl;
-  }
-
   // sample interaction
   string command;
   while (cin >> command)
@@ -29,6 +25,7 @@ int main()
     {
       Craft.printCrafting();
       Itory.printInventory();
+      cout << endl;
     }
     else if (command == "GIVE")
     {

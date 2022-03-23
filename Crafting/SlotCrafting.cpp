@@ -1,4 +1,5 @@
 #include"SlotCrafting.hpp"
+#include <iomanip>
 
 SlotCrafting::SlotCrafting(){
     this->slotItem = NULL;
@@ -48,8 +49,9 @@ void SlotCrafting::dropSlotCrafting(){
 // tampilkan slot crafting
 void SlotCrafting::printSlotCrafting(){
     if(this->slotItem==NULL){
-        cout<<"[E]";
+        cout<<"[E]"<<string(7, ' ');
     }else{
-        cout<<"["<<this->slotItem->getID()<<"]";
+        string output = "[" + to_string(this->slotItem->getID()) + "]";
+        cout<<output<<string(10-output.length(), ' ');
     }    
 }
