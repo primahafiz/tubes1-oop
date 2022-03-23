@@ -4,6 +4,10 @@
 
 #include "nonTool.hpp"
 #include "nonToolType.hpp"
+#include <map>
+#include <tuple>
+
+extern map <string, tuple<int, string, string>> itemConfig;
 
 /* Kelas Plank */
 template <class T>
@@ -13,23 +17,27 @@ private:
     T plankType;
 public:
     // Default Constructor
-    Plank() : nonTool() {
+    Plank() : nonTool()
+    {
         T temp;
         setPlankType(temp);
     }
 
     // User-Defined Constructor
-    Plank(T plankType, int quantity) : nonTool(4+plankType.getId(), plankType.getName()+"_PLANK", "PLANK", quantity) {
+    Plank(T plankType, int quantity) : nonTool(get<0>(itemConfig.find(plankType.getName()+"_PLANK")->second), plankType.getName()+"_PLANK", get<1>(itemConfig.find(plankType.getName()+"_PLANK")->second), quantity)
+    {
         setPlankType(plankType);
     }
 
     // Setter plankType
-    void setPlankType(T plankType) {
+    void setPlankType(T plankType)
+    {
         this->plankType = plankType;
     }
 
     // Getter plankType
-    T getPlankType() const {
+    T getPlankType() const
+    {
         return this->plankType;
     }
 };

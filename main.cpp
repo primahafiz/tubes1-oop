@@ -1,10 +1,11 @@
 // sample main file, replace this with your own code
 #include "head.hpp"
 
+map<string, tuple<int, string, string>> itemConfig;
+
 int main()
 {
   map<pair<string, int>, string> recipe;
-  map<string, tuple<int, string, string>> itemConfig;
   readConfig(recipe, itemConfig);
   Inventory Itory = Inventory();
   Crafting Craft = Crafting();

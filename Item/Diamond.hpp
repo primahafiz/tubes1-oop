@@ -3,6 +3,10 @@
 #define __DIAMOND_HPP__
 
 #include "nonTool.hpp"
+#include <map>
+#include <tuple>
+
+extern map <string, tuple<int, string, string>> itemConfig;
 
 /* Kelas Diamond */
 class Diamond : public nonTool
@@ -16,7 +20,7 @@ public:
     }
 
     // User-Defined Constructor
-    Diamond(int quantity) : nonTool(12, "DIAMOND", "-", quantity)
+    Diamond(int quantity) : nonTool(get<0>(itemConfig.find("DIAMOND")->second), "DIAMOND", get<1>(itemConfig.find("DIAMOND")->second), quantity)
     {
     }
 

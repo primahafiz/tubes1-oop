@@ -4,6 +4,10 @@
 
 #include "Tool.hpp"
 #include "ToolType.hpp"
+#include <map>
+#include <tuple>
+
+extern map <string, tuple<int, string, string>> itemConfig;
 
 /* Kelas Sword */
 template <class T>
@@ -19,17 +23,20 @@ public:
     }
 
     // User-Defined Constructor
-    Sword(T swordType) : Tool(21+swordType.getId(), swordType.getName()+"_SWORD", "-", 10) {
+    Sword(T swordType) : Tool(get<0>(itemConfig.find(swordType.getName()+"_SWORD")->second), swordType.getName()+"_SWORD", get<1>(itemConfig.find(swordType.getName()+"_SWORD")->second), 10)
+    {
         setSwordType(swordType);
     }
 
     // Setter swordType
-    void setSwordType(T swordType) {
+    void setSwordType(T swordType)
+    {
         this->swordType = swordType;
     }
 
     // Getter swordType
-    T getSwordType() const {
+    T getSwordType() const 
+    {
         return this->swordType;
     }
 };

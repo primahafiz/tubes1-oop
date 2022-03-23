@@ -19,17 +19,20 @@ public:
     }
 
     // User-Defined Constructor
-    Stone(T stoneType, int quantity) : nonTool(8+stoneType.getId(), stoneType.getName(), "STONE", quantity) {
+    Stone(T stoneType, int quantity) : nonTool(get<0>(itemConfig.find(stoneType.getName()+"_STONE")->second), stoneType.getName()+"_STONE", get<1>(itemConfig.find(stoneType.getName()+"_STONE")->second), quantity)
+    {
         setStoneType(stoneType);
     }
 
     // Setter stoneType
-    void setStoneType(T stoneType) {
+    void setStoneType(T stoneType)
+    {
         this->stoneType = stoneType;
     }
 
     // Getter stoneType
-    T getStoneType() const {
+    T getStoneType() const
+    {
         return this->stoneType;
     }
 };

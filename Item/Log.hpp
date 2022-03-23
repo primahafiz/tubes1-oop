@@ -4,6 +4,10 @@
 
 #include "nonTool.hpp"
 #include "nonToolType.hpp"
+#include <map>
+#include <tuple>
+
+extern map <string, tuple<int, string, string>> itemConfig;
 
 /* Kelas Log */
 template <class T>
@@ -13,23 +17,27 @@ private:
     T logType;
 public:
     // Default Constructor
-    Log() : nonTool() {
+    Log() : nonTool()
+    {
         T temp;
         setLogType(temp);
     }
 
     // User-Defined Constructor
-    Log(T logType, int quantity) : nonTool(1+logType.getId(), logType.getName()+"_LOG", "LOG", quantity) {
+    Log(T logType, int quantity) : nonTool(get<0>(itemConfig.find(logType.getName()+"_LOG")->second), logType.getName()+"_LOG", get<1>(itemConfig.find(logType.getName()+"_LOG")->second), quantity)
+    {
         setLogType(logType);
     }
 
     // Setter logType
-    void setLogType(T logType) {
+    void setLogType(T logType)
+    {
         this->logType = logType;
     }
 
     // Getter logType
-    T getLogType() const {
+    T getLogType() const
+    {
         return this->logType;
     }
 };
