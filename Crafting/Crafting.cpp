@@ -47,8 +47,8 @@ bool Crafting::isCraftingEmpty(int i){
 
 // swap position item i and j, untuk symmetry
 void Crafting::swap(int i, int j){
-    if(this->crafting[i].isSlotCraftingEmpty() || this->crafting[i].isSlotCraftingEmpty()){
-        if(this->crafting[i].isSlotCraftingEmpty() && this->crafting[i].isSlotCraftingEmpty()){
+    if(this->crafting[i].isSlotCraftingEmpty() || this->crafting[j].isSlotCraftingEmpty()){
+        if(this->crafting[i].isSlotCraftingEmpty() && this->crafting[j].isSlotCraftingEmpty()){
             //
         }else if(this->crafting[i].isSlotCraftingEmpty()){
             addToCrafting(getCrafting(j),i);
@@ -102,7 +102,6 @@ bool Crafting::Craftable (string X){
         return false;
     }
 
-
 }
 
 // helper function
@@ -113,18 +112,16 @@ bool Crafting::CraftableSymmetry (string X){
 
    
     size_t found = crafting.find(X);
-    if (found != string::npos){ 
+    if (found != string::npos){
         return true;
     } else {
         return false;
     }
-   
 }
 
 // mengecek apakah craftable
 bool Crafting::isCraftable(string X){
     bool craftable = false;
-
 
     if (Craftable(X) || CraftableSymmetry(X)){
         craftable = true;
