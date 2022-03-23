@@ -3,6 +3,7 @@
 #include<vector>
 
 Crafting::Crafting(){
+    this->crafting = new SlotCrafting[9];    
     for (int i = 0; i < 9; i++){
         crafting[i] = SlotCrafting();
     }

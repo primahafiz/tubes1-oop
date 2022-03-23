@@ -15,7 +15,7 @@
 class Crafting
 {
 private:
-    SlotCrafting* crafting;
+        SlotCrafting* crafting;
 
 public:
         Crafting();
