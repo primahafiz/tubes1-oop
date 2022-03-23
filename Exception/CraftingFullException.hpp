@@ -8,3 +8,5 @@ class CraftingFullException : public BaseException{
         cout<<"Cannot add to crafting because the crafting slot is filled"<<endl;
     }
 };
+
+#endif

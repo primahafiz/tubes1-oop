@@ -9,7 +9,6 @@
 #include "../Exception/CraftingFullException.hpp"
 #include "../Exception/CraftingNullException.hpp"
 #include "../Exception/CraftingIndexException.hpp"
-#include ""
 #include <map>
 #include <string>
 

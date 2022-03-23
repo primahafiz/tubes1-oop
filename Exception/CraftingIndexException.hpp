@@ -8,3 +8,5 @@ class CraftingIndexException : public BaseException{
         cout<<"Crafting slot out of bound"<<endl;
     }
 };
+
+#endif

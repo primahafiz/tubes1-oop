@@ -8,3 +8,5 @@ class CraftingNullException : public BaseException{
         cout<<"Cannot get item from crafting because the crafting slot is empty"<<endl;
     }
 };
+
+#endif
