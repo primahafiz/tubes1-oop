@@ -83,7 +83,11 @@ string Crafting::getStringCrafting(){
             if(getCrafting(i)->getType() == "-"){
                 crafting += getCrafting(i)->getName();                
             } else {
-                crafting += getCrafting(i)->getType();                
+                if (getCrafting(i)->getType() == "LOG"){
+                    crafting += getCrafting(i)->getName();                    
+                } else {
+                    crafting += getCrafting(i)->getType();                      
+                }               
             }
         }
     }

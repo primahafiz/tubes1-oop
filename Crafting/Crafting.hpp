@@ -5,6 +5,7 @@
 #include "../Item/Item.hpp"
 #include "../Item/Tool.hpp"
 #include "../util.hpp"
+#include "../Item/Log.hpp"
 #include <map>
 #include <string>
 
