@@ -41,21 +41,7 @@ int main()
       string InventoryID;
       int itemQty;
       cin >> InventoryID >> itemQty;
-      if (Itory.getInventory(StringToInt(InventoryID))->isTool())
-      {
-        Itory.deleteFromInventory(InventoryID, 1);
-      }
-      else
-      {
-        if (Itory.getInventory(StringToInt(InventoryID))->getQuantity() >= itemQty)
-        {
-          Itory.deleteFromInventory(InventoryID, itemQty);
-        }
-        else
-        {
-          cout << "Error!" << endl;
-        }
-      }
+      Itory.deleteFromInventory(InventoryID, itemQty);
     }
     else if (command == "MOVE")
     {
@@ -163,7 +149,7 @@ int main()
       {
         for (auto x : recipe)
         {
-          cout << "resep saat ini" << x.second << endl;
+          // cout << "resep saat ini" << x.second <<" "<<Craft.getStringCrafting()<< endl;
           if (Craft.isCraftable(x.second))
           {
             Item *item = getItemFromString((x.first).first, (x.first).second);

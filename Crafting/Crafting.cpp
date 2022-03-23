@@ -80,7 +80,7 @@ string Crafting::getStringCrafting(){
         if (isCraftingEmpty(i)){
             crafting += "-";
         } else {
-            if(getCrafting(i)->getType() != "-"){
+            if(getCrafting(i)->getType() == "-"){
                 crafting += getCrafting(i)->getName();                
             } else {
                 crafting += getCrafting(i)->getType();                
