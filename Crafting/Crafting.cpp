@@ -87,14 +87,23 @@ string Crafting::getStringCrafting(){
             }
         }
     }
+
+    crafting = cutString(crafting);
+    // cout << crafting << endl;
     return crafting;
 }
 
 // helper function
 bool Crafting::Craftable (string X){
     string crafting = getStringCrafting();
-    size_t found = crafting.find(X);
-    if (found != string::npos){
+    //size_t found = crafting.find(X);
+    /*if (found != string::npos){
+        return true;
+    } else {
+        return false;
+    }*/
+
+    if (X == crafting){
         return true;
     } else {
         return false;
@@ -107,8 +116,16 @@ bool Crafting::CraftableSymmetry (string X){
     string crafting = getStringCrafting();
     symmetry();
 
+    /*
     size_t found = crafting.find(X);
     if (found != string::npos){ 
+        return true;
+    } else {
+        return false;
+    }
+    */
+
+    if (X == crafting){
         return true;
     } else {
         return false;

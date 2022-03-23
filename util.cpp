@@ -227,3 +227,28 @@ int StringToInt(string ID)
     }
     return ans;
 }
+
+string cutString(string s){
+    bool found = false;
+    int i = 0;
+    while (i < 9 && !found){
+        if (s[i] != '-'){
+            found = true;
+            s = s.substr(i);
+        } 
+        i++;
+    }
+
+    int stringsize = s.size();
+    i = stringsize - 1;
+    found = false;
+    while (i >= 0 && !found){
+        if (s[i] != '-'){
+            found = true;
+            s = s.substr(0,i+1);
+        } 
+        i--;
+    }
+
+    return s;
+}

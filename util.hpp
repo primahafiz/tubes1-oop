@@ -32,4 +32,6 @@ void readConfig(map<pair<string, int>, string> &recipe, map<string, tuple<int, s
 Item *getItemFromString(string s, int num);
 
 int StringToInt(string ID);
+
+string cutString(string recipe);
 #endif
