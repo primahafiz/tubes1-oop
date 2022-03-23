@@ -6,13 +6,17 @@
 #include "../Item/Tool.hpp"
 #include "../util.hpp"
 #include "../Item/Log.hpp"
+#include "../Exception/CraftingFullException.hpp"
+#include "../Exception/CraftingNullException.hpp"
+#include "../Exception/CraftingIndexException.hpp"
+#include ""
 #include <map>
 #include <string>
 
 class Crafting
 {
 private:
-    map<int, SlotCrafting> crafting;
+    SlotCrafting* crafting;
 
 public:
         Crafting();

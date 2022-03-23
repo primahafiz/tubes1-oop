@@ -9,22 +9,32 @@ Crafting::Crafting(){
 }
 
 Crafting::~Crafting(){
-
+    delete[] this->crafting;
 }
 
 // add sebuah Item pada slot crafting ke i
 void Crafting::addToCrafting(Item *a, int i){
-    if (this->crafting[i].isSlotCraftingEmpty()){
-        crafting[i].addSlotCrafting(getItemFromString(a->getName(),1));
-    }else{
-        // throw exception
+    if (i >= 0 && i <= 8){
+        if (this->crafting[i].isSlotCraftingEmpty()){
+            crafting[i].addSlotCrafting(getItemFromString(a->getName(),1));
+        } else {
+            throw CraftingFullException();
+        }        
+    } else {
+        throw CraftingIndexException();
     }
 }
-
+ 
 // delete sebuah Item pada slot crafting ke i
 void Crafting::deleteCrafting(int i){
-    if (!this->crafting[i].isSlotCraftingEmpty()){
-        crafting[i].dropSlotCrafting();
+    if (i >= 0 && i <= 8){
+        if (!this->crafting[i].isSlotCraftingEmpty()){
+            crafting[i].dropSlotCrafting();
+        } else {
+            throw CraftingNullException();
+        }
+    } else {
+        throw CraftingIndexException();
     }
 }
 
