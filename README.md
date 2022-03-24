@@ -1,26 +1,30 @@
-# Minecraft-Template
+# Tubes 1 OOP
 
-Template repository for Tubes 1 IF2210 2021/2022. Feel free to replace this README with your own content.
+Tugas Besar IF2210 Pemrograman Berorientasi Objek 2022
+Dipersiapkan oleh:
 
-## What's Inside
-This template consists of:
-- config folder containing all the config files (items and recipes)
-- tests folder containing two sample test files (input and answer)
-- main.cpp containing the sample main code
-- check.cpp containing the code for checking
-- makefile for compiling and testing
+Kelompok 5 CLAU++  (K01)
 
-## Running the Makefile
-Make sure you are using Linux with C++17. WSL also works if you are using Windows.
-```
-sudo apt-get install make g++
-make all
-```
-Using the sample main file, it should return that 1 out of 2 tests passed.
+1. Primanda Adyatma Hafiz / 13520022
+2. Hansel Valentino Tanoto / 13520046
+3. Lyora Felicya / 13520073
+4. Claudia / 13520076
+5. Nicholas Budiono / 13520121
 
-## Adding More Tests
-You can add more tests by adding more files to the tests folder. Tests consists of two files, input with "in" extension and answer with "ans" extension. Each test should have exactly one EXPORT command which exports the current inventory into an "out" file in the tests folder. Please refer to the sample tests. Checking will be done by comparing the answer file and the output file.
+## Deskripsi singkat
 
-As the test is done by comparing the output files, you can freely use standard output in your program.
+Akibat pandemi COVID-19 yang berlangsung lama, Mobita tetap menjadi kurir, namun
+Mobita mulai lelah dan bosan. Apalagi, sebagai mahasiswa yang berkuliah di バンドン工
+科大学 (ITB) cabang Shinjuku, tugas besar Mobita sangaaaaaaaat banyak. Oleh karena
+itu, Doraemonangis berusaha untuk menghibur Mobita dengan membuat server
+Tambang-Kerajinan (sebuah game). Doraemonangis butuh bantuan kalian untuk membuat gadget yang dapat
+membuat gadget melalui crafting!
 
-Automated testing will not work if you are using GUI (obviously).
+## Requirement Program
+1. Ubuntu
+2. Compiler C++
+
+## Cara Menjalankan Program
+
+1. Clone repository ini
+2. Pada folder utama ketikkan command ```make all```
