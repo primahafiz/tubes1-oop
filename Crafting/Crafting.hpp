@@ -44,7 +44,9 @@ public:
         bool CraftableSymmetry (string X);
 
         // mengecek apakah craftable
-        bool isCraftable(string X);
+        bool isCraftable(string X,int k);
+        // mengecek jumlah item di craft
+        int numCraftable();
 
         bool ExactCraftable(string X);
         // helper function 

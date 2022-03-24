@@ -136,13 +136,21 @@ bool Crafting::CraftableSymmetry (string X){
 }
 
 // mengecek apakah craftable
-bool Crafting::isCraftable(string X){
+bool Crafting::isCraftable(string X,int k){
     bool craftable = false;
 
     if (Craftable(X) || CraftableSymmetry(X)){
-        craftable = true;
+        craftable = true & k==numCraftable();
     }
     return craftable;
+}
+
+int Crafting::numCraftable(){
+    int ans=0;
+    for(int i=0;i<9;i++){
+        if(!crafting[i].isSlotCraftingEmpty())ans++;
+    }
+    return ans;
 }
 
 bool Crafting::ExactCraftable(string X){
@@ -215,7 +223,6 @@ bool Crafting::isToolCraftable(){
         if (!isCraftingEmpty(i)){
             if (getCrafting(i)->isTool()){
                 countTool += 1;
-                cout << i << endl;
                 idx.push_back(i);
             }            
         }

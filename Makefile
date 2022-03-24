@@ -6,21 +6,12 @@ EXECUTABLE_FILENAME = main
 ALL_SRCS := $(wildcard *.cpp Crafting/*.cpp Inventory/*.cpp Exception/*.cpp Item/*.cpp)
 SRCS     := $(filter-out check.cpp, $(ALL_SRCS))
 
-all: compile test check
+all: compile
 
 # Compile all cpp files except check.cpp
 compile:
 	g++ -std=c++17 -o $(EXECUTABLE_FILENAME) $(SRCS)
-
-# Test
-test: $(TC_FOLDER)/*.$(EXT_IN) $(EXECUTABLE_FILENAME)
-	for inputfile in $(TC_FOLDER)/*.$(EXT_IN); do \
-		./$(EXECUTABLE_FILENAME) < $$inputfile; \
-	done;
-
-# Check
-check: FORCE check.cpp
-	g++ -std=c++17 -o check check.cpp
-	./check
+	clear
+	./main
 
 FORCE: ;

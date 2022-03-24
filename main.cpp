@@ -7,10 +7,14 @@ map<string, tuple<int, string, string>> itemConfig;
 int main()
 {
   // Variables
-  map<pair<string, int>, string> recipe;
+  map<pair<string, int>, pair<string,int>> recipe;
   readConfig(recipe, itemConfig);
   Inventory Itory = Inventory();
   Crafting Craft = Crafting();
+
+  for(auto x:recipe){
+    cout<<x.first.first<<" "<<x.second.second<<endl;
+  }
 
   // Commands
   string command;
@@ -177,7 +181,7 @@ int main()
           int countCraftable = 0;
           for (auto x : recipe)
           {
-            if (Craft.isCraftable(x.second))
+            if (Craft.isCraftable(x.second.first,x.second.second))
             {
               countCraftable++;
             }
@@ -190,7 +194,7 @@ int main()
           {
             for (auto x : recipe)
             {
-              if (Craft.isCraftable(x.second))
+              if (Craft.isCraftable(x.second.first,x.second.second))
               {
                 Item *item = getItemFromString((x.first).first, (x.first).second);
                 Itory.addToInventory(item);
@@ -204,7 +208,7 @@ int main()
             for (auto x : recipe)
             {
               cout<<x.first.first<<endl;
-              if (Craft.isExactCraftable(x.second))
+              if (Craft.isExactCraftable(x.second.first))
               {
                 Item *item = getItemFromString((x.first).first, (x.first).second);
                 Itory.addToInventory(item);

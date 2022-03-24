@@ -32,7 +32,7 @@
 
 using namespace std;
 
-void readConfig(map<pair<string, int>, string> &recipe, map<string, tuple<int, string, string>> &itemConfig);
+void readConfig(map<pair<string, int>, pair<string,int>> &recipe, map<string, tuple<int, string, string>> &itemConfig);
 
 Item *getItemFromString(string s, int num);
 
