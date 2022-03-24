@@ -212,6 +212,10 @@ Item *getItemFromString(string s, int num)
         DiamondType DIAMOND;
         return new Pickaxe<DiamondType>(DIAMOND);
     }
+    else
+    {
+        throw InvalidItemException();
+    }
     return 0;
 }
 
@@ -222,6 +226,9 @@ int StringToInt(string ID)
     int n = ID.size();
     for (int i = n - 1; i > 0; i--)
     {
+        if(ID[i]-'0'<0 || ID[i]-'0'>9){
+            throw IDException();
+        }
         ans += (ID[i] - '0') * mul;
         mul *= 10;
     }

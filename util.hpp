@@ -24,6 +24,11 @@
 #include "Item/Sword.hpp"
 #include "Item/Tool.hpp"
 #include "Item/ToolType.hpp"
+#include "Exception/IDException.hpp"
+#include "Exception/InvalidItemException.hpp"
+#include "Exception/ItemNotToolException.hpp"
+#include "Exception/ItemNullException.hpp"
+#include "Exception/ItemNotNonToolException.hpp"
 
 using namespace std;
 

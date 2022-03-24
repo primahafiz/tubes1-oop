@@ -47,6 +47,7 @@ Item* Crafting::getCrafting(int i){
 // clear crafting
 void Crafting::clearCrafting(){
     for (int i = 0; i < 9; i++){
+        if(this->crafting[i].isSlotCraftingEmpty())continue;
         deleteCrafting(i);
     }
 }

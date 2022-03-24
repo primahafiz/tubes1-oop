@@ -264,6 +264,9 @@ int Inventory::parsingID(string ID)
     int n = ID.size();
     for (int i = n - 1; i > 0; i--)
     {
+        if(ID[i]-'0'<0 || ID[i]-'0'>9){
+            throw IDException();
+        }
         ans += (ID[i] - '0') * mul;
         mul *= 10;
     }

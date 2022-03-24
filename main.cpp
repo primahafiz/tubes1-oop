@@ -17,202 +17,227 @@ int main()
   cout << ">> ";
   while (cin >> command)
   {
-    if (command == "SHOW")
+    try
     {
-      Craft.printCrafting();
-      Itory.printInventory();
-    }
-
-    else if (command == "GIVE")
-    {
-      string itemName;
-      int itemQty;
-      cin >> itemName >> itemQty;
-      Itory.addToInventory(getItemFromString(itemName, itemQty));
-    }
-
-    else if (command == "DISCARD")
-    {
-      string InventoryID;
-      int itemQty;
-      cin >> InventoryID >> itemQty;
-      Itory.deleteFromInventory(InventoryID, itemQty);
-    }
-
-    else if (command == "MOVE")
-    {
-      string slotSrc;
-      int slotQty;
-      string slotDest;
-      list<string> Dest;
-      cin >> slotSrc >> slotQty;
-      if (slotSrc.front() == 'I')
+      if (command == "SHOW")
       {
-        if (slotQty == 1)
+        Craft.printCrafting();
+        Itory.printInventory();
+      }
+
+      else if (command == "GIVE")
+      {
+        string itemName;
+        int itemQty;
+        cin >> itemName >> itemQty;
+        if(!getItemFromString(itemName, itemQty)->isTool()){
+          Itory.addToInventory(getItemFromString(itemName, itemQty));
+        }else{
+          if(Itory.getAvailableSlot(getItemFromString(itemName,1))<itemQty){
+            throw InventoryFullException();
+          }else{
+            for(int i=0;i<itemQty;i++){
+              Item *a=getItemFromString(itemName,1);
+              Itory.addToInventory(a);
+            }
+          }
+        }
+      }
+
+      else if (command == "DISCARD")
+      {
+        string InventoryID;
+        int itemQty;
+        cin >> InventoryID >> itemQty;
+        Itory.deleteFromInventory(InventoryID, itemQty);
+      }
+
+      else if (command == "MOVE")
+      {
+        string slotSrc;
+        int slotQty;
+        string slotDest;
+        list<string> Dest;
+        cin >> slotSrc >> slotQty;
+        if (slotSrc.front() == 'I')
+        {
+          if (slotQty == 1)
+          {
+            cin >> slotDest;
+            if (slotDest.front() == 'I')
+            {
+              Itory.combineTwoItem(slotSrc, slotDest);
+            }
+            else if(slotDest.front() == 'C')
+            {
+              Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(slotDest));
+              Itory.deleteFromInventory(slotSrc, 1);
+            }else
+            {
+              throw IDException();
+            }
+          }
+          else
+          {
+            if(Itory.getInventory(StringToInt(slotSrc))!=NULL)
+            {
+              if(!Itory.getInventory(StringToInt(slotSrc))->isTool())
+              {
+                  if (Itory.getInventory(StringToInt(slotSrc))->getQuantity() >= slotQty)
+                  {
+                    for (int i = 0; i < slotQty; i++)
+                    {
+                      cin >> slotDest;
+                      if(slotDest.front()!='C'){
+                        throw IDException();
+                      }
+                      int ID=StringToInt(slotDest);
+                      Dest.push_back(slotDest);
+                    }
+                    for (int j = 0; j < slotQty; j++)
+                    {
+                      Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(Dest.front()));
+                      Dest.pop_front();
+                    }
+                    Itory.deleteFromInventory(slotSrc, slotQty);
+                  }
+                  else
+                  {
+                    throw DeleteInventoryException();
+                  }
+                }
+                else
+                {
+                  throw ItemNotNonToolException();
+                }
+            }
+            else
+            {
+              throw ItemNullException();
+            }
+          }
+        }
+        else
         {
           cin >> slotDest;
           if (slotDest.front() == 'I')
           {
-            Itory.combineTwoItem(slotSrc, slotDest);
+            int y = StringToInt(slotSrc);
+            Itory.addToInventory(slotDest, Craft.getCrafting(y));
+            Craft.deleteCrafting(y);
           }
           else
           {
-            Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(slotDest));
-            Itory.deleteFromInventory(slotSrc, 1);
+            throw IDException();
           }
         }
-        else
+      }
+
+      else if (command == "USE")
+      {
+        string InventoryID;
+        cin >> InventoryID;
+        if (Itory.getInventory(StringToInt(InventoryID)) != NULL)
         {
-          if(Itory.getInventory(StringToInt(slotSrc))!=NULL)
+          if (Itory.getInventory(StringToInt(InventoryID))->isTool())
           {
-            if(!Itory.getInventory(StringToInt(slotSrc))->isTool())
+            if (Itory.getInventory(StringToInt(InventoryID))->getDurability() > 1)
             {
-                if (Itory.getInventory(StringToInt(slotSrc))->getQuantity() >= slotQty)
-                {
-                  for (int i = 0; i < slotQty; i++)
-                  {
-                    cin >> slotDest;
-                    Dest.push_back(slotDest);
-                  }
-                  for (int j = 0; j < slotQty; j++)
-                  {
-                    Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(Dest.front()));
-                    Dest.pop_front();
-                  }
-                  Itory.deleteFromInventory(slotSrc, slotQty);
-                }
-                else
-                {
-                  cout<<"Item tidak cukup"<<endl;
-                }
-              }
-              else
-              {
-                cout<<"Item bukan kategori NonTool"<<endl;
-              }
+              Itory.getInventory(StringToInt(InventoryID))->modifyDurability(-1);
+            }
+            else
+            {
+              Itory.deleteFromInventory(InventoryID, 1);
+            }
           }
           else
           {
-            cout << "Inventory kosong" << endl;
-          }
-        }
-      }
-      else
-      {
-        cin >> slotDest;
-        if (slotDest.front() == 'I')
-        {
-          int y = StringToInt(slotSrc);
-          Itory.addToInventory(slotDest, Craft.getCrafting(y));
-          Craft.deleteCrafting(y);
-        }
-        else
-        {
-          cout << "Input MOVE salah!" << endl;
-        }
-      }
-    }
-
-    else if (command == "USE")
-    {
-      string InventoryID;
-      cin >> InventoryID;
-      if (Itory.getInventory(StringToInt(InventoryID)) != NULL)
-      {
-        if (Itory.getInventory(StringToInt(InventoryID))->isTool())
-        {
-          if (Itory.getInventory(StringToInt(InventoryID))->getDurability() > 1)
-          {
-            Itory.getInventory(StringToInt(InventoryID))->modifyDurability(-1);
-          }
-          else
-          {
-            Itory.deleteFromInventory(InventoryID, 1);
+            throw ItemNotToolException();
           }
         }
         else
         {
-          cout << "Inventory slot bukan berisi Tool!" << endl;
+          throw ItemNullException();
         }
       }
-      else
-      {
-        cout << "Tidak ada Item!" << endl;
-      }
-    }
 
-    else if (command == "CRAFT")
-    // Dicek jika bisa craft tool tanpa recipe
-    // jika tidak, cek resep
-    //  looping respnya (per satu file)
-    //  Dalam looping, dicek bisa atau ga
-    {
-      if (Craft.isToolCraftable())
+      else if (command == "CRAFT")
+      // Dicek jika bisa craft tool tanpa recipe
+      // jika tidak, cek resep
+      //  looping respnya (per satu file)
+      //  Dalam looping, dicek bisa atau ga
       {
-        Item *x = Craft.getToolCraftable();
-        Itory.addToInventory(x);
-      }
-      else
-      {
-        int countCraftable = 0;
-        for (auto x : recipe)
+        if (Craft.isToolCraftable())
         {
-          if (Craft.isCraftable(x.second))
-          {
-            countCraftable++;
-          }
-        }        
-        if (countCraftable == 0)
-        {
-          cout << "Not craftable" << endl;
+          Item *x = Craft.getToolCraftable();
+          Itory.addToInventory(x);
         }
-        else if (countCraftable == 1)
+        else
         {
+          int countCraftable = 0;
           for (auto x : recipe)
           {
             if (Craft.isCraftable(x.second))
             {
-              Item *item = getItemFromString((x.first).first, (x.first).second);
-              Itory.addToInventory(item);
-              Craft.clearCrafting();
-              break;
+              countCraftable++;
             }
-          }          
-        }
-        else
-        {
-          for (auto x : recipe)
+          }        
+          if (countCraftable == 0)
           {
-            if (Craft.isExactCraftable(x.second))
+            cout << "Not craftable" << endl;
+          }
+          else if (countCraftable == 1)
+          {
+            for (auto x : recipe)
             {
-              Item *item = getItemFromString((x.first).first, (x.first).second);
-              Itory.addToInventory(item);
-              Craft.clearCrafting();
-              break;
-            }
-          }   
+              if (Craft.isCraftable(x.second))
+              {
+                Item *item = getItemFromString((x.first).first, (x.first).second);
+                Itory.addToInventory(item);
+                Craft.clearCrafting();
+                break;
+              }
+            }          
+          }
+          else
+          {
+            for (auto x : recipe)
+            {
+              cout<<x.first.first<<endl;
+              if (Craft.isExactCraftable(x.second))
+              {
+                Item *item = getItemFromString((x.first).first, (x.first).second);
+                Itory.addToInventory(item);
+                Craft.clearCrafting();
+                break;
+              }
+            }   
+          }
         }
       }
-    }
 
-    else if (command == "EXPORT")
+      else if (command == "EXPORT")
+      {
+        string outputPath;
+        cin >> outputPath;
+        Itory.exportInventory(outputPath);
+        cout << "Exported" << endl;
+      }
+
+      else if (command == "EXIT")
+      {
+        break;
+      }
+
+      else
+      {
+        cout << "Invalid command" << endl;
+      }
+    }
+    catch(BaseException *e)
     {
-      string outputPath;
-      cin >> outputPath;
-      Itory.exportInventory(outputPath);
-      cout << "Exported" << endl;
+      e->printMessage();
     }
-
-    else if (command == "EXIT")
-    {
-      break;
-    }
-
-    else
-    {
-      cout << "Invalid command" << endl;
-    }
-
     cout << ">> ";
   }
   return 0;
