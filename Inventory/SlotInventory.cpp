@@ -4,12 +4,15 @@
 SlotInventory::SlotInventory(){
     this->slotItem=NULL;
 }
+
 SlotInventory::SlotInventory(Item *x){
     this->slotItem=x;
 }
+
 SlotInventory::SlotInventory(const SlotInventory& a){
     this->slotItem=a.getSlotItem();
 }
+
 SlotInventory::~SlotInventory(){
     delete this->slotItem;
 }
@@ -17,12 +20,15 @@ SlotInventory::~SlotInventory(){
 bool SlotInventory::isSlotEmpty() const{
     return this->slotItem==NULL;
 }
+
 bool SlotInventory::isSlotFull() const{
     return !this->isSlotEmpty();
 }
+
 Item* SlotInventory::getSlotItem() const{
     return this->slotItem;
 }
+
 bool SlotInventory::canBeAdded(int num) const{
     return this->slotItem->getQuantity();
 }
@@ -30,9 +36,11 @@ bool SlotInventory::canBeAdded(int num) const{
 void SlotInventory::addSlot(Item *x){
     this->slotItem=x;
 }
+
 void SlotInventory::dropSlot(){
     this->slotItem=NULL;
 }
+
 void SlotInventory::dropSlot(int num){
     if(this->isSlotEmpty()){
         throw DeleteInventoryException();
@@ -47,6 +55,7 @@ void SlotInventory::dropSlot(int num){
         throw DeleteInventoryException();
     }
 }
+
 void SlotInventory::addQuantity(int num){
     this->slotItem->setQuantity(this->slotItem->getQuantity()+num);
 }
@@ -82,17 +91,3 @@ void SlotInventory::printSpace(int num){
         cout<<" ";
     }
 }
-
-// void SlotInventory::printSlot(){
-//     if(this->slotItem==NULL){
-//         cout<<"EMPTY";
-//     }else{
-//         cout<<"Item "<<this->slotItem->getID()<<" (";
-//         if(this->slotItem->isTool()){
-//             cout<<1;
-//         }else{
-//             cout<<this->slotItem->getQuantity();
-//         }
-//         cout<<")";
-//     }
-// }

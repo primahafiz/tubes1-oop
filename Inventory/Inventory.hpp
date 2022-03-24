@@ -10,7 +10,6 @@
 #include "../Exception/InventoryFullException.hpp"
 #include "../Exception/CombineNullItemException.hpp"
 #include "../Exception/CombineDifferentItemException.hpp"
-#include <map>
 #include <algorithm>
 
 class Inventory{

@@ -1,5 +1,5 @@
 #include"SlotCrafting.hpp"
-#include <iomanip>
+
 
 SlotCrafting::SlotCrafting(){
     this->slotItem = NULL;

@@ -1,32 +1,28 @@
-// sample main file, replace this with your own code
+/* MAIN PROGRAM */
 #include "head.hpp"
 
+// Global Variables
 map<string, tuple<int, string, string>> itemConfig;
 
 int main()
 {
+  // Variables
   map<pair<string, int>, string> recipe;
   readConfig(recipe, itemConfig);
   Inventory Itory = Inventory();
   Crafting Craft = Crafting();
 
-  for (auto x : recipe){
-    cout<<"resep saat ini"<<x.second<<"\n";
-    if (x.second == "DIAMONDDIAMOND-DIAMONDSTICK--STICK"){
-      cout << "ketemu" << endl;
-    }
-  }
-
-  // sample interaction
+  // Commands
   string command;
+  cout << ">> ";
   while (cin >> command)
   {
     if (command == "SHOW")
     {
       Craft.printCrafting();
       Itory.printInventory();
-      cout << endl;
     }
+
     else if (command == "GIVE")
     {
       string itemName;
@@ -34,6 +30,7 @@ int main()
       cin >> itemName >> itemQty;
       Itory.addToInventory(getItemFromString(itemName, itemQty));
     }
+
     else if (command == "DISCARD")
     {
       string InventoryID;
@@ -41,9 +38,9 @@ int main()
       cin >> InventoryID >> itemQty;
       Itory.deleteFromInventory(InventoryID, itemQty);
     }
+
     else if (command == "MOVE")
     {
-
       string slotSrc;
       int slotQty;
       string slotDest;
@@ -66,8 +63,10 @@ int main()
         }
         else
         {
-          if(Itory.getInventory(StringToInt(slotSrc))!=NULL){
-            if(!Itory.getInventory(StringToInt(slotSrc))->isTool()){
+          if(Itory.getInventory(StringToInt(slotSrc))!=NULL)
+          {
+            if(!Itory.getInventory(StringToInt(slotSrc))->isTool())
+            {
                 if (Itory.getInventory(StringToInt(slotSrc))->getQuantity() >= slotQty)
                 {
                   for (int i = 0; i < slotQty; i++)
@@ -81,11 +80,15 @@ int main()
                     Dest.pop_front();
                   }
                   Itory.deleteFromInventory(slotSrc, slotQty);
-                }else{
+                }
+                else
+                {
                   cout<<"Item tidak cukup"<<endl;
                 }
-              }else{
-                cout<<"Item bukan Non Tool"<<endl;
+              }
+              else
+              {
+                cout<<"Item bukan kategori NonTool"<<endl;
               }
           }
           else
@@ -105,10 +108,11 @@ int main()
         }
         else
         {
-          cout << "Input MOVE Salah!" << endl;
+          cout << "Input MOVE salah!" << endl;
         }
       }
     }
+
     else if (command == "USE")
     {
       string InventoryID;
@@ -136,7 +140,12 @@ int main()
         cout << "Tidak ada Item!" << endl;
       }
     }
+
     else if (command == "CRAFT")
+    // Dicek jika bisa craft tool tanpa recipe
+    // jika tidak, cek resep
+    //  looping respnya (per satu file)
+    //  Dalam looping, dicek bisa atau ga
     {
       if (Craft.isToolCraftable())
       {
@@ -145,33 +154,20 @@ int main()
       }
       else
       {
-        /*
-        for (auto x : recipe)
-        {
-          // cout << "resep saat ini" << x.second <<" "<<Craft.getStringCrafting()<< endl;
-          if (Craft.isCraftable(x.second))
-          {
-            Item *item = getItemFromString((x.first).first, (x.first).second);
-            Itory.addToInventory(item);
-            Craft.clearCrafting();
-            break;
-          }
-        }
-        */
         int countCraftable = 0;
         for (auto x : recipe)
         {
-          // cout << "resep saat ini" << x.second <<" "<<Craft.getStringCrafting()<< endl;
           if (Craft.isCraftable(x.second))
           {
             countCraftable++;
           }
         }        
-
-        if (countCraftable == 0){
+        if (countCraftable == 0)
+        {
           cout << "Not craftable" << endl;
-        } else if (countCraftable == 1){
-
+        }
+        else if (countCraftable == 1)
+        {
           for (auto x : recipe)
           {
             if (Craft.isCraftable(x.second))
@@ -182,12 +178,11 @@ int main()
               break;
             }
           }          
-
-        } else {
-
+        }
+        else
+        {
           for (auto x : recipe)
           {
-            // cout << "resep saat ini" << x.second <<" "<<Craft.getStringCrafting()<< endl;
             if (Craft.isExactCraftable(x.second))
             {
               Item *item = getItemFromString((x.first).first, (x.first).second);
@@ -196,14 +191,10 @@ int main()
               break;
             }
           }   
-          
         }
       }
-      // Dicek jika bisa craft tool tanpa recipe
-      // jika tidak, cek resep
-      //  looping respnya (per satu file)
-      //  Dalam looping, dicek bisa atau ga
     }
+
     else if (command == "EXPORT")
     {
       string outputPath;
@@ -211,14 +202,18 @@ int main()
       Itory.exportInventory(outputPath);
       cout << "Exported" << endl;
     }
+
     else if (command == "EXIT")
     {
       break;
     }
+
     else
     {
       cout << "Invalid command" << endl;
     }
+
+    cout << ">> ";
   }
   return 0;
 }

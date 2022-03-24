@@ -3,7 +3,7 @@ EXT_IN = in
 EXT_OUT = out
 EXT_ANS = ans
 EXECUTABLE_FILENAME = main
-ALL_SRCS := $(wildcard *.cpp)
+ALL_SRCS := $(wildcard *.cpp Crafting/*.cpp Inventory/*.cpp Exception/*.cpp Item/*.cpp)
 SRCS     := $(filter-out check.cpp, $(ALL_SRCS))
 
 all: compile test check

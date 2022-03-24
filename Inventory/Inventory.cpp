@@ -8,6 +8,7 @@ Inventory::Inventory()
         inventory[i] = SlotInventory();
     }
 }
+
 Inventory::~Inventory()
 {
     delete[] this->inventory;
@@ -57,7 +58,6 @@ void Inventory::addToInventory(Item *a)
                 int toAdd = min(cur, 64 - inventory[i].getSlotItem()->getQuantity());
                 cur -= toAdd;
                 inventory[i].addSlot(new nonTool(a->getID(), a->getName(), a->getType(), toAdd + inventory[i].getSlotItem()->getQuantity()));
-                cout<<inventory[i].getSlotItem()->getQuantity()<<endl;
             }
         }
         for (int i = 0; i < 27; i++)
@@ -221,6 +221,7 @@ void Inventory::combineTwoItem(string IDSrc, string IDDest)
         throw CombineDifferentItemException();
     }
 }
+
 void Inventory::exportInventory(string path)
 {
     ofstream inventoryFile;
@@ -247,6 +248,7 @@ void Inventory::exportInventory(string path)
     }
     inventoryFile.close();
 }
+
 void Inventory::printInventory()
 {
     for (int i = 0; i < 27; i++)
@@ -254,6 +256,7 @@ void Inventory::printInventory()
         inventory[i].printSlot(i % 9 == 8);
     }
 }
+
 int Inventory::parsingID(string ID)
 {
     int ans = 0;

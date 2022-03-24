@@ -2,7 +2,6 @@
 #define SLOT_INVENTORY_H
 
 #include <iostream>
-#include <iomanip>
 #include "../Item/Item.hpp"
 #include "../Exception/DeleteInventoryException.hpp"
 
