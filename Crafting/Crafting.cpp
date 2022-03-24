@@ -17,7 +17,13 @@ Crafting::~Crafting(){
 void Crafting::addToCrafting(Item *a, int i){
     if (i >= 0 && i <= 8){
         if (this->crafting[i].isSlotCraftingEmpty()){
-            crafting[i].addSlotCrafting(getItemFromString(a->getName(),1));
+            if(a->isTool()){
+                int durability=a->getDurability();
+                crafting[i].addSlotCrafting(getItemFromString(a->getName(),1));
+                crafting[i].getSlotCraftingItem()->setDurability(durability);
+            }else{
+                crafting[i].addSlotCrafting(getItemFromString(a->getName(),1));
+            }
         } else {
             throw CraftingFullException();
         }        
@@ -248,7 +254,6 @@ Item* Crafting::getToolCraftable(){
         if (!isCraftingEmpty(i)){
             if (getCrafting(i)->isTool()){
                 countTool += 1;
-                cout << i << endl;
                 idx.push_back(i);
             }            
         }
@@ -257,7 +262,7 @@ Item* Crafting::getToolCraftable(){
     int id = getCrafting(idx[0])->getID();
     string name = getCrafting(idx[0])->getName();
     string type = getCrafting(idx[0])->getType();
-    int oriDurability = (getCrafting(idx[0])->getDurability() + getCrafting(idx[0])->getDurability());
+    int oriDurability = (getCrafting(idx[0])->getDurability() + getCrafting(idx[1])->getDurability());
     int durability = min(10, oriDurability);
 
     Item* tool = new Tool(id, name, type, durability);
