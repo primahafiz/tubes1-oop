@@ -217,6 +217,18 @@ Item *getItemFromString(string s, int num)
         DiamondType DIAMOND;
         return new Pickaxe<DiamondType>(DIAMOND);
     }
+    else if (s == "LADDER")
+    {
+        return new Ladder(num);
+    }
+    else if (s == "STRING")
+    {
+        return new String(num);
+    }
+    else if (s == "FISHING_ROD")
+    {
+        return new FishingRod(num);
+    }
     else
     {
         throw InvalidItemException();
