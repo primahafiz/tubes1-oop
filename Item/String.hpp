@@ -8,7 +8,7 @@
 
 extern map <string, tuple<int, string, string>> itemConfig;
 
-/* Kelas LADDER */
+/* Kelas STRING */
 class String : public nonTool {
 private:
     /* Atribut */
