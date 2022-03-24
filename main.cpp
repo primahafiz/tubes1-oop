@@ -12,10 +12,6 @@ int main()
   Inventory Itory = Inventory();
   Crafting Craft = Crafting();
 
-  for(auto x:recipe){
-    cout<<x.first.first<<" "<<x.second.second<<endl;
-  }
-
   // Commands
   string command;
   cout << ">> ";
