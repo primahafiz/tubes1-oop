@@ -41,7 +41,7 @@ void Inventory::addToInventory(Item *a)
         }
         else
         {
-            throw InventoryFullException();
+            throw new InventoryFullException();
         }
     }
     else if (this->getAvailableSlot(a) >= a->getQuantity())
@@ -74,7 +74,7 @@ void Inventory::addToInventory(Item *a)
     }
     else
     {
-        throw InventoryFullException();
+        throw new InventoryFullException();
     }
 }
 
@@ -95,7 +95,7 @@ void Inventory::addToInventory(string ID, Item *a)
         {
             if (a->getQuantity() > 64)
             {
-                throw InventoryFullException();
+                throw new InventoryFullException();
             }
             else
             {
@@ -107,7 +107,7 @@ void Inventory::addToInventory(string ID, Item *a)
     {
         if (a->isTool())
         {
-            throw InventoryFullException();
+            throw new InventoryFullException();
         }
         else
         {
@@ -115,7 +115,7 @@ void Inventory::addToInventory(string ID, Item *a)
             {
                 if (a->getQuantity() + inventory[slotId].getSlotItem()->getQuantity() > 64)
                 {
-                    throw InventoryFullException();
+                    throw new InventoryFullException();
                 }
                 else
                 {
@@ -124,7 +124,7 @@ void Inventory::addToInventory(string ID, Item *a)
             }
             else
             {
-                throw CombineDifferentItemException();
+                throw new CombineDifferentItemException();
             }
         }
     }
@@ -168,7 +168,7 @@ void Inventory::deleteFromInventory(string ID, int num)
     int slotId = this->parsingID(ID);
     if (inventory[slotId].isSlotEmpty())
     {
-        throw DeleteInventoryException();
+        throw new DeleteInventoryException();
     }
     else if (inventory[slotId].getSlotItem()->isTool())
     {
@@ -178,7 +178,7 @@ void Inventory::deleteFromInventory(string ID, int num)
         }
         else
         {
-            throw DeleteInventoryException();
+            throw new DeleteInventoryException();
         }
     }
     else if (!inventory[slotId].getSlotItem()->isTool())
@@ -189,7 +189,7 @@ void Inventory::deleteFromInventory(string ID, int num)
         }
         else
         {
-            throw DeleteInventoryException();
+            throw new DeleteInventoryException();
         }
     }
 }
@@ -205,7 +205,7 @@ void Inventory::combineTwoItem(string IDSrc, string IDDest)
     int slotId2 = this->parsingID(IDDest);
     if (inventory[slotId1].isSlotEmpty() || inventory[slotId2].isSlotEmpty())
     {
-        throw CombineNullItemException();
+        throw new CombineNullItemException();
     }
     else if (!inventory[slotId1].getSlotItem()->isTool() && !inventory[slotId2].getSlotItem()->isTool() && inventory[slotId1].getSlotItem()->getName() == inventory[slotId2].getSlotItem()->getName())
     {
@@ -222,7 +222,7 @@ void Inventory::combineTwoItem(string IDSrc, string IDDest)
     }
     else
     {
-        throw CombineDifferentItemException();
+        throw new CombineDifferentItemException();
     }
 }
 
@@ -269,7 +269,7 @@ int Inventory::parsingID(string ID)
     for (int i = n - 1; i > 0; i--)
     {
         if(ID[i]-'0'<0 || ID[i]-'0'>9){
-            throw IDException();
+            throw new IDException();
         }
         ans += (ID[i] - '0') * mul;
         mul *= 10;

@@ -25,10 +25,10 @@ void Crafting::addToCrafting(Item *a, int i){
                 crafting[i].addSlotCrafting(getItemFromString(a->getName(),1));
             }
         } else {
-            throw CraftingFullException();
+            throw new CraftingFullException();
         }        
     } else {
-        throw CraftingIndexException();
+        throw new CraftingIndexException();
     }
 }
  
@@ -38,10 +38,10 @@ void Crafting::deleteCrafting(int i){
         if (!this->crafting[i].isSlotCraftingEmpty()){
             crafting[i].dropSlotCrafting();
         } else {
-            throw CraftingNullException();
+            throw new CraftingNullException();
         }
     } else {
-        throw CraftingIndexException();
+        throw new CraftingIndexException();
     }
 }
 

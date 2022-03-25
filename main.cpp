@@ -34,7 +34,7 @@ int main()
           Itory<<getItemFromString(itemName, itemQty);
         }else{
           if(Itory.getAvailableSlot(getItemFromString(itemName,1))<itemQty){
-            throw InventoryFullException();
+            throw new InventoryFullException();
           }else{
             for(int i=0;i<itemQty;i++){
               Item *a=getItemFromString(itemName,1);
@@ -74,7 +74,7 @@ int main()
               Itory.deleteFromInventory(slotSrc, 1);
             }else
             {
-              throw IDException();
+              throw new IDException();
             }
           }
           else
@@ -89,7 +89,7 @@ int main()
                     {
                       cin >> slotDest;
                       if(slotDest.front()!='C'){
-                        throw IDException();
+                        throw new IDException();
                       }
                       int ID=StringToInt(slotDest);
                       Dest.push_back(slotDest);
@@ -103,17 +103,17 @@ int main()
                   }
                   else
                   {
-                    throw DeleteInventoryException();
+                    throw new DeleteInventoryException();
                   }
                 }
                 else
                 {
-                  throw ItemNotNonToolException();
+                  throw new ItemNotNonToolException();
                 }
             }
             else
             {
-              throw ItemNullException();
+              throw new ItemNullException();
             }
           }
         }
@@ -128,7 +128,7 @@ int main()
           }
           else
           {
-            throw IDException();
+            throw new IDException();
           }
         }
       }
@@ -152,12 +152,12 @@ int main()
           }
           else
           {
-            throw ItemNotToolException();
+            throw new ItemNotToolException();
           }
         }
         else
         {
-          throw ItemNullException();
+          throw new ItemNullException();
         }
       }
 

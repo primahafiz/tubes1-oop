@@ -231,7 +231,7 @@ Item *getItemFromString(string s, int num)
     }
     else
     {
-        throw InvalidItemException();
+        throw new InvalidItemException();
     }
     return 0;
 }
@@ -244,7 +244,7 @@ int StringToInt(string ID)
     for (int i = n - 1; i > 0; i--)
     {
         if(ID[i]-'0'<0 || ID[i]-'0'>9){
-            throw IDException();
+            throw new IDException();
         }
         ans += (ID[i] - '0') * mul;
         mul *= 10;

@@ -42,7 +42,7 @@ void SlotCrafting::dropSlotCrafting(){
     if (this->slotItem != NULL){
         this->slotItem = NULL;
     } else {
-        // throw exception
+        //
     }
 }
 

@@ -43,7 +43,7 @@ void SlotInventory::dropSlot(){
 
 void SlotInventory::dropSlot(int num){
     if(this->isSlotEmpty()){
-        throw DeleteInventoryException();
+        throw new DeleteInventoryException();
     }else if(this->getSlotItem()->isTool()){
         this->dropSlot();
     }else if(this->getSlotItem()->getQuantity()-num>=0){
@@ -52,7 +52,7 @@ void SlotInventory::dropSlot(int num){
             this->slotItem=NULL;
         }
     }else{
-        throw DeleteInventoryException();
+        throw new DeleteInventoryException();
     }
 }
 
