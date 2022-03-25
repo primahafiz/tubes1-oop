@@ -249,6 +249,15 @@ int StringToInt(string ID)
         ans += (ID[i] - '0') * mul;
         mul *= 10;
     }
+    if(ID[0]!='I' && ID[0]!='C'){
+        throw new IDException();
+    }
+    if(ID[0]=='I' && ans>=27){
+        throw new IDException();
+    }
+    if(ID[0]=='C' && ans>=9){
+        throw new IDException();
+    }
     return ans;
 }
 
