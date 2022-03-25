@@ -78,6 +78,10 @@ void Inventory::addToInventory(Item *a)
     }
 }
 
+void Inventory::operator<<(Item *a){
+    this->addToInventory(a);
+}
+
 void Inventory::addToInventory(string ID, Item *a)
 {
     int slotId = this->parsingID(ID);

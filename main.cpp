@@ -31,14 +31,14 @@ int main()
         int itemQty;
         cin >> itemName >> itemQty;
         if(!getItemFromString(itemName, itemQty)->isTool()){
-          Itory.addToInventory(getItemFromString(itemName, itemQty));
+          Itory<<getItemFromString(itemName, itemQty);
         }else{
           if(Itory.getAvailableSlot(getItemFromString(itemName,1))<itemQty){
             throw InventoryFullException();
           }else{
             for(int i=0;i<itemQty;i++){
               Item *a=getItemFromString(itemName,1);
-              Itory.addToInventory(a);
+              Itory<<a;
             }
           }
         }
@@ -170,7 +170,7 @@ int main()
         if (Craft.isToolCraftable())
         {
           Item *x = Craft.getToolCraftable();
-          Itory.addToInventory(x);
+          Itory<<x;
         }
         else
         {
@@ -193,7 +193,7 @@ int main()
               if (Craft.isCraftable(x.second.first,x.second.second))
               {
                 Item *item = getItemFromString((x.first).first, (x.first).second);
-                Itory.addToInventory(item);
+                Itory<<item;
                 Craft.clearCrafting();
                 break;
               }
@@ -207,7 +207,7 @@ int main()
               if (Craft.isExactCraftable(x.second.first))
               {
                 Item *item = getItemFromString((x.first).first, (x.first).second);
-                Itory.addToInventory(item);
+                Itory<<item;
                 Craft.clearCrafting();
                 break;
               }

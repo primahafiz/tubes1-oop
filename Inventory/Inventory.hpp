@@ -23,6 +23,7 @@ class Inventory{
 
         void addToInventory(Item *a);
         void addToInventory(string ID,Item *a);
+        void operator<<(Item *a);
         int getAvailableSlot(Item *a);
         void deleteFromInventory(string ID,int num);
         Item* getInventory(int k);
