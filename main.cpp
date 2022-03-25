@@ -126,6 +126,9 @@ int main()
           if (slotDest.front() == 'I')
           {
             int y = StringToInt(slotSrc);
+            if(Craft.getCrafting(y)==NULL){
+              throw new ItemNullException();
+            }
             Itory.addToInventory(slotDest, Craft.getCrafting(y));
             Craft.deleteCrafting(y);
           }
