@@ -70,6 +70,9 @@ int main()
             }
             else if(slotDest.front() == 'C')
             {
+              if(Itory.getInventory(StringToInt(slotSrc))==NULL){
+                throw new ItemNullException();
+              }
               Craft.addToCrafting(Itory.getInventory(StringToInt(slotSrc)), StringToInt(slotDest));
               Itory.deleteFromInventory(slotSrc, 1);
             }else
