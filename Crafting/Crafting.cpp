@@ -235,7 +235,7 @@ bool Crafting::isToolCraftable(){
     }
 
     if (countTool == 2){
-        if (getCrafting(idx[0])->getType() == getCrafting(idx[1])->getType()){
+        if (getCrafting(idx[0])->getName() == getCrafting(idx[1])->getName()){
             if (isOtherThanEmpty(idx[0], idx[1])){               
                 craftable = true;
             }
